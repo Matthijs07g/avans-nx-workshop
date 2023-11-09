@@ -16,7 +16,16 @@ export class MealService {
             isVega: true,
             dateServed: new Date(),
             sort: MealSort.Breakfast,
-            cook: '',
+            cook: 'Gerrit',
+        },
+        {
+            id: '1',
+            title: 'Pokebowl zalm',
+            description: 'lekkere zalm',
+            isVega: false,
+            dateServed: new Date(),
+            sort: MealSort.Lunch,
+            cook: 'Paul',
         },
     ]);
 
@@ -39,7 +48,7 @@ export class MealService {
      * return signature - we still want to respond with the complete
      * object
      */
-    create(meal: Pick<IMeal, 'title' | 'description'>): IMeal {
+    create(meal: Pick<IMeal, 'title' | 'description' | 'cook' | 'sort'>): IMeal {
         Logger.log('create', this.TAG);
         const current = this.meals$.value;
         // Use the incoming data, a randomized ID, and a default value of `false` to create the new to-do
@@ -47,9 +56,7 @@ export class MealService {
             ...meal,
             id: `meal-${Math.floor(Math.random() * 10000)}`,
             isVega: false,
-            dateServed: new Date(),
-            sort: MealSort.Breakfast,
-            cook: ''
+            dateServed: new Date(), 
         };
         this.meals$.next([...current, newMeal]);
         return newMeal;

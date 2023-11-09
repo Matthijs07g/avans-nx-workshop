@@ -25,6 +25,7 @@ export class ApiResponseInterceptor implements NestInterceptor {
                             type: results instanceof Array ? 'list' : 'object',
                             count:
                                 results instanceof Array ? results.length : 1,
+                            date: new Date(),
                         },
                     };
                 } else {
@@ -34,6 +35,7 @@ export class ApiResponseInterceptor implements NestInterceptor {
                             version: '1.0',
                             type: 'none',
                             count: 0,
+                            date: new Date(),
                         },
                     };
                 }
