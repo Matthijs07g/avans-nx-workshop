@@ -1,8 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { IMeal } from '@avans-nx-workshop/shared/api';
+import { IMeal, MealSort } from '@avans-nx-workshop/shared/api';
 import { BehaviorSubject } from 'rxjs';
 import { Logger } from '@nestjs/common';
-import { MealSort } from '@avans-nx-workshop/shared/api';
 
 @Injectable()
 export class MealService {
