@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+.container-fluid{
+    background-color: darkolivegreen;    
+}
+.navv{
+    background-color: darkolivegreen;
+}
+
+.nav-link{
+    color: whitesmoke;
+}
+.navbar-brand{
+    color: whitesmoke;
+}
