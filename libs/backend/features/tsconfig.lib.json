@@ -12,6 +12,6 @@
     "noFallthroughCasesInSwitch": true,
     "composite": true
   },
-  "include": ["src/**/*.ts", "src/lib/meal/meal.service.ts"],
+  "include": ["src/**/*.ts", "src/lib/meal/meal.service.ts", "src/lib/user/user.service.ts"],
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
 }

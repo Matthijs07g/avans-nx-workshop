@@ -1,1 +1,13 @@
-<p>user-list works!</p>
+<div class="row">
+<div *ngFor="let user of users">
+<div class="card" routerLink="{{ user.id }}">
+  <img src="{{ user.picture }}" class="card-img-top" alt="profile">
+  <div class="card-body">
+    <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
+    <p class="card-text">{{ user.emailadres }}</p>
+    <a class="btn btn-primary edit" routerLink="{{ user.id }}/edit">Edit</a>
+    <a href="#" class="btn btn-primary delete">Delete</a>
+  </div>
+</div>
+</div>
+</div> 

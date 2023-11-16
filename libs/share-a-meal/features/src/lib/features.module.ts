@@ -8,9 +8,11 @@ import { AboutPageComponent } from './about/about-page.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
+import { UserService } from './user/user.service';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, RouterLink],
   declarations: [
     MealListComponent,
     MealDetailComponent,
@@ -19,7 +21,13 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
     UserDetailsComponent,
     UserEditComponent,
   ],
-  providers: [MealService],
-  exports: [MealListComponent, MealDetailComponent, AboutPageComponent],
+  providers: [MealService, UserService],
+  exports: [
+    MealListComponent, 
+    MealDetailComponent, 
+    AboutPageComponent, 
+    UserDetailsComponent, 
+    UserEditComponent, 
+    UserListComponent],
 })
 export class FeaturesModule {}

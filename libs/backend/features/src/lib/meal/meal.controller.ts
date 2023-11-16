@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { MealService } from './meal.service';
 import { Get, Param, Post, Body } from '@nestjs/common';
-import { IMeal } from '../../../../../shared/api/src/lib/models/meal.interface';
+import { IMeal } from '@avans-nx-workshop/shared/api';
 import { CreateMealDto } from '@avans-nx-workshop/backend/dto';
 
 @Controller('meal')
