@@ -21,3 +21,13 @@
     color: whitesmoke;
     border-color: whitesmoke;
 }
+footer{
+    background-color: maroon;
+    min-height: 45px;
+}
+.footertext{
+    color: whitesmoke;
+    margin-left: 43%;
+    margin-top: 10%;
+    padding-top: 10px;
+}

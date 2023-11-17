@@ -7,14 +7,12 @@
 .usercards{
     align-self: center;
 }
-.card{
-    margin-left: 20px;
-    margin-top: 15px;
-}
+
 .row{
     margin-top: 25px;
-    margin-left: 50px;
 }
-.card{
-    width: 19rem;
+.add{
+    margin-left: 46%;
+    max-width: 100px;
+    background-color: darkred;
 }

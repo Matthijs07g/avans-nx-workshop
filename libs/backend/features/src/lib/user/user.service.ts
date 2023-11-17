@@ -27,7 +27,29 @@ export class UserService {
             emailadres: 'paulelst@gmail.com',
             birthdate: new Date(),
             role: Roles.Guest,
-            friends: ['Peter'],
+            friends: ['Peter', 'Pieter'],
+            pass: '1234test'
+        },
+        {
+            id: '2',
+            firstName: 'Pieter',
+            lastName: 'van Hoorn',
+            picture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8TEhqyP79-ehF4mgO_hv9KwvnX9CY9yhNLA&usqp=CAU',
+            emailadres: 'pieterhoorn@gmail.com',
+            birthdate: new Date(),
+            role: Roles.Owner,
+            friends: ['Paul'],
+            pass: '1234test'
+        },
+        {
+            id: '3',
+            firstName: 'Henk',
+            lastName: 'de Jong',
+            picture: 'https://www.rtlnieuws.nl/sites/default/files/content/images/2022/10/01/jeffrey%20dahmer%20netflix.jpeg?itok=DWhwtmWA&width=2048&height=1152&impolicy=semi_dynamic',
+            emailadres: 'jonghenk@gmail.com',
+            birthdate: new Date(),
+            role: Roles.Guest,
+            friends: [''],
             pass: '1234test'
         },
     ]);
