@@ -5,11 +5,12 @@
             Deze applicatie is gemaakt in het kader van het vak 'Clientside web
             frameworks' van Avans Hogeschool Breda.
         </p>
-        <h1>Naam van jouw project</h1>
+        <h1>F1 blogger</h1>
         <p>
-            Hier beschrijft je wat je project inhoudt. Beschrijf ook de
-            entiteiten/domeinobjecten die je gebruikt, en benoem per entiteit de
-            attributen met hun datatype.
+            Op de site worden er blogposts gemaakt over onderwerpen van formule 1. Bijvoorbeeld over de auto's, coureurs, circuits en teams.<br>
+            Er wordt gebruikgemaakt van 6 entiteiten.<br>
+            4 van deze entiteiten kunnen onderwerpen zijn van de blogs, die zijn hiervoor al benoemd. Ook is het mogelijk om informatie over deze ondewerpen op te zoeken op de site<br>
+            Ook zijn er natuurlijk users die de blogs plaatsen. Deze users kunnen ook bevriend worden met elkaar om zo elkaars blogposts te volgen.
         </p>
     </div>
     <div class="col-sm-6 col-md-4 col-lg-3">
@@ -18,54 +19,83 @@
                 class="d-flex justify-content-center align-items-center px-3 py-3"
             >
                 <!-- Je mag een foto van jezelf toevoegen, maar dat is niet verplicht. -->
-                <img
+                <!-- <img
                     src="assets/images/person.png"
                     class="card-img-top rounded-circle border profile-pic px-4 py-4"
                     alt="..."
-                />
+                /> -->
             </div>
             <div class="card-body">
-                <h5 class="card-title">Jouw naam hier</h5>
-                <p class="card-text">Studentnummer: 12345678</p>
+                <h5 class="card-title">Matthijs van Gastel</h5>
+                <p class="card-text">Studentnummer: 2186230</p>
             </div>
         </div>
     </div>
 </div>
 
 <h3>Entiteiten</h3>
-<p>
-    Hier geef je een toelichting op je entiteiten. Voeg ook een afbeelding van
-    je model toe zoals dat bij NoSql gevraagd wordt.
-</p>
 
-<img src="assets/images/erd.png" class="px-5 py-5" alt="..." />
+<img [src]="imagePath" class="px-5 py-5" alt="..." />
 
 <div class="row">
     <div class="col-sm-12 col-md-4">
-        <p>Entiteit 1</p>
+        <p>Circuits</p>
         <ul>
             <li>naam: string</li>
-            <li>id: number</li>
-            <li>birthdate: date</li>
-            <li>isSelected: boolean</li>
+            <li>location: string</li>
+            <li>Length: int</li>
+            <li>mapImgUrl: string</li>
         </ul>
     </div>
     <div class="col-sm-12 col-md-4">
-        <p>Entiteit 2</p>
+        <p>Driver</p>
         <ul>
-            <li>naam: string</li>
+            <li>firstName: string</li>
+            <li>lastName: string</li>
             <li>id: number</li>
             <li>birthdate: date</li>
-            <li>isSelected: boolean</li>
+            <li>nationality: string</li>
+            <li>racewins: int</li>
+            <li>timesChampions: int</li>
+            <li>timeActive: string</li>
         </ul>
     </div>
     <div class="col-sm-12 col-md-4">
-        <p>Entiteit 3</p>
+        <p>Team</p>
         <ul>
-            <li>naam: string</li>
-            <li>id: number</li>
+            <li>teamName: string</li>
+            <li>Owner: string</li>
+            <li>constructorChampions: int</li>
+            <li>dateFounded: date</li>
+        </ul>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <p>Car</p>
+        <ul>
+            <li>engineName: string</li>
+            <li>fuel: string</li>
+            <li>type: string</li>
+            <li>sponsors: string</li>
+            <li>Brand: string</li>
+        </ul>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <p>Blog</p>
+        <ul>
+            <li>ownerId: int</li>
+            <li>Title: string</li>
+            <li>content: string</li>
+            <li>datePosted: date</li>
+        </ul>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <p>User</p>
+        <ul>
+            <li>firstName: string</li>
+            <li>lastName: string</li>
+            <li>emailadres: int</li>
             <li>birthdate: date</li>
-            <li>isSelected: boolean</li>
+            <li>password: string</li>
         </ul>
     </div>
 </div>
@@ -73,10 +103,6 @@
 <div class="row">
     <div class="col">
         <h3>Userstories</h3>
-        <p>
-            Hier verwoord je in de vorm van userstories de functionaliteit van
-            jouw applicatie.
-        </p>
 
         <table class="table table-bordered">
             <thead>
@@ -88,34 +114,42 @@
                 <tr>
                     <td>1</td>
                     <td>
-                        Als gebruiker wil ik een overzicht van movies kunnen
-                        raadplegen, zodat ik kan zien welke movies op dit moment
-                        beschikbaar zijn.
+                        Als gebruiker wil ik andere gebruikers bevrienden.
                     </td>
-                    <td>Overzicht is een grid.</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>
-                        Als ingelogde gebruiker wil ik zelf een movie kunnen
-                        toevoegen, zodat ik mijn movies in het systeem kan
-                        invoeren.
+                        Als gebruiker wil ik blogs kunnen maken.
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>3</td>
                     <td>
-                        Als ingelogde gebruiker wil ik mijn eigen movies kunnen
-                        bewerken en verwijderen, zodat ik mijn informatie
-                        up-to-date kan houden.
+                        Als gebruiker wil ik informatie kunnen op zoeken over coureurs, circuits, teams en/of auto's
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>4</td>
                     <td>
-                        <p>Voeg zelf meer userstories toe.</p>
+                        Als gebruiker wil ik blogs kunnen folteren op basis van coureurs, circuits, teams en/of auto's
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        Als gebruiker wil ik blogs kunnen bekijken van andere gebruikers
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        Als admin wil ik de nodige stappen kunnen nemen om de applicatie te beschermen van ongepaste inhoud
                     </td>
                     <td></td>
                 </tr>

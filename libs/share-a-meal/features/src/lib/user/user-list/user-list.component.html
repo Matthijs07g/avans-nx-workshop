@@ -1,9 +1,8 @@
 <div class="container">
-  
   <br><a class="btn btn-primary add" routerLink="new">Add user</a><br>
   <div class="row row-cols-4">
-    <div *ngFor="let user of users" class="col-md-3">
-      <div class="card m-3 flex-fill" style="width: 18rem;" routerLink="{{ user.id }}">
+    <div *ngFor="let user of users" class="col-md-3 d-flex">
+      <div class="card m-3 flex-fill d-flex flex-column" style="width: 18rem;" routerLink="{{ user.id }}">
         <img src="{{ user.picture }}" class="card-img-top" alt="profile">
         <div class="card-body">
           <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
@@ -13,7 +12,6 @@
     </div>
   </div> 
 </div>
-
 
 <!-- <a class="btn btn-primary edit" routerLink="{{ user.id }}/edit">Edit</a>
           <a href="#" class="btn btn-primary delete">Delete</a> -->

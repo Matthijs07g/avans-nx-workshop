@@ -47,9 +47,9 @@ export class UserService{
      *
      */
     public read(id: string | null, options?: any): Observable<IUser> {
-        console.log(`read ${this.endpoint}`);
+        console.log(`read ${this.endpoint} /${id}`);
         return this.http
-            .get<ApiResponse<IUser>>(this.endpoint, {
+            .get<ApiResponse<IUser>>(this.endpoint+'/'+id, {
                 ...options,
                 ...httpOptions,
             })

@@ -34,23 +34,34 @@ export class UserService {
             id: '2',
             firstName: 'Pieter',
             lastName: 'van Hoorn',
-            picture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8TEhqyP79-ehF4mgO_hv9KwvnX9CY9yhNLA&usqp=CAU',
+            picture: 'https://www.thoughtco.com/thmb/FXKCnWCLxMxl9c9gkHyNco5Kj5g=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/good-looking-man-with-big-beard-56688bcf3df78ce1611f7ba8.jpg',
             emailadres: 'pieterhoorn@gmail.com',
             birthdate: new Date(),
             role: Roles.Owner,
-            friends: ['Paul'],
-            pass: '1234test'
+            friends: ['Paul', 'Gerrit'],
+            pass: '1234567890'
         },
         {
             id: '3',
             firstName: 'Henk',
             lastName: 'de Jong',
-            picture: 'https://www.rtlnieuws.nl/sites/default/files/content/images/2022/10/01/jeffrey%20dahmer%20netflix.jpeg?itok=DWhwtmWA&width=2048&height=1152&impolicy=semi_dynamic',
+            picture: 'https://img.freepik.com/vrije-photo/jonge-bebaarde-man-met-gestreept-overhemd_273609-5677.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699660800&semt=sph',
             emailadres: 'jonghenk@gmail.com',
             birthdate: new Date(),
             role: Roles.Guest,
             friends: [''],
-            pass: '1234test'
+            pass: 'test1234'
+        },
+        {
+            id: '4',
+            firstName: 'Gerrit',
+            lastName: 'Klaassen',
+            picture: 'https://t4.ftcdn.net/jpg/03/26/98/51/360_F_326985142_1aaKcEjMQW6ULp6oI9MYuv8lN9f8sFmj.jpg',
+            emailadres: 'gerrit123@gmail.com',
+            birthdate: new Date(),
+            role: Roles.Admin,
+            friends: ['Pieter'],
+            pass: 'testtest'
         },
     ]);
 
@@ -61,11 +72,11 @@ export class UserService {
 
     getOne(id: string): IUser {
         Logger.log(`getOne(${id})`, this.TAG);
-        const meal = this.users$.value.find((td) => td.id === id);
-        if (!meal) {
-            throw new NotFoundException(`Meal could not be found!`);
+        const user = this.users$.value.find((td) => td.id === id);
+        if (!user) {
+            throw new NotFoundException(`User could not be found!`);
         }
-        return meal;
+        return user;
     }
 
     /**

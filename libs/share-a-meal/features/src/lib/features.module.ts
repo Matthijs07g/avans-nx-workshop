@@ -10,9 +10,10 @@ import { UserDetailsComponent } from './user/user-details/user-details.component
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserService } from './user/user.service';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, RouterLink],
+  imports: [CommonModule, HttpClientModule, RouterLink, FormsModule],
   declarations: [
     MealListComponent,
     MealDetailComponent,
