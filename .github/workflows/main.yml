@@ -36,10 +36,10 @@ jobs:
       - name: Upload frontend-app artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: frontend-app
-          path: frontend-app-release.zip
+          name: share-a-meal-web
+          path: share-a-meal-web-release.zip
           
-      - name: Upload backend-api artifact for deployment job
+      - name: Upload data-api artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: data-api
@@ -56,10 +56,10 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: frontend-app
+          name: share-a-meal-web
 
       - name: Unzip artifact for deployment
-        run: unzip frontend-app-release.zip
+        run: unzip share-a-meal-web-release.zip
         
       - name: Deploy to static azure web app
         id: builddeploy
@@ -84,10 +84,10 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: backend-api
+          name: data-api
 
       - name: Unzip artifact for deployment
-        run: unzip backend-api-release.zip
+        run: unzip data-api-release.zip
 
       - name: Install dependencies
         run: npm install
