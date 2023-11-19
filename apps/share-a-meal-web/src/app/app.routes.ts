@@ -16,7 +16,7 @@ export const appRoutes: Route[] = [
     {
         path: 'dashboard',
         pathMatch: 'full',
-        component: MealListComponent
+        component: UserListComponent
     },
     {
         path: 'about',
