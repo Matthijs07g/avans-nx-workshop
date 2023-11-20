@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, IUser } from '@avans-nx-workshop/shared/api';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
@@ -18,7 +19,10 @@ export const httpOptions = {
  */
 @Injectable()
 export class UserService{
-    endpoint = 'http://localhost:3000/api/user';
+    // endpoint = 'http://localhost:3000/api/user';
+    // onlineEndpoint = 'avans-nx-matthijs.azurewebsites.net/api/user';
+
+    endpoint = environment.apiEndpoint
 
     constructor(private readonly http: HttpClient) {}
 
@@ -31,7 +35,7 @@ export class UserService{
         console.log(`list ${this.endpoint}`);
 
         return this.http
-            .get<ApiResponse<IUser[]>>(this.endpoint, {
+            .get<ApiResponse<IUser[]>>(this.endpoint+'user', {
                 ...options,
                 ...httpOptions,
             })
@@ -47,9 +51,9 @@ export class UserService{
      *
      */
     public read(id: string | null, options?: any): Observable<IUser> {
-        console.log(`read ${this.endpoint} /${id}`);
+        console.log(`read ${this.endpoint}/${id}`);
         return this.http
-            .get<ApiResponse<IUser>>(this.endpoint+'/'+id, {
+            .get<ApiResponse<IUser>>(this.endpoint+'/user/'+id, {
                 ...options,
                 ...httpOptions,
             })
