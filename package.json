@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "deploy": "nx run share-a-meal-web:build --prod",
+    "deploy": "nx run share-a-meal-web:build --configuration=production",
     "build": "nx run-many -t build",
     "test": "nx run-many -t test"
   },

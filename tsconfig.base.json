@@ -13,6 +13,12 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    
+      "angularCompilerOptions": {
+        "enableIvy": true,
+        "aot": true
+        // ... other Angular compiler options
+      },
     "baseUrl": ".",
     "paths": {
       "@avans-nx-workshop/backend/dto": ["libs/backend/dto/src/index.ts"],
