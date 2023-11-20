@@ -1,4 +1,4 @@
 export const environment = {
-    production: true,
+    Production: true,
     apiEndpoint: 'https://avans-nx-matthijs.azurewebsites.net/api/',
 };
