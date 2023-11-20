@@ -30,5 +30,8 @@
     }
   },
   "exclude": ["node_modules", "tmp"],
-  "files": ["libs/share-a-meal/environments/environment.prod.ts"]
+  "production": {
+    "aot": true
+    // ... other production-specific options if needed
+  }
 }
