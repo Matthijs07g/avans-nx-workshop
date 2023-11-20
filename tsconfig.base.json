@@ -30,8 +30,4 @@
     }
   },
   "exclude": ["node_modules", "tmp"],
-  "production": {
-    "aot": true
-    // ... other production-specific options if needed
-  }
 }
