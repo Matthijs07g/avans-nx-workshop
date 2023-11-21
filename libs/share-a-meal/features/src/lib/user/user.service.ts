@@ -19,8 +19,8 @@ export const httpOptions = {
  */
 @Injectable()
 export class UserService{
-     endpoint = 'http://localhost:3000/api/';
-   //endpoint = 'avans-nx-matthijs.azurewebsites.net/api/';
+     //endpoint = 'http://localhost:3000/api/';
+     endpoint = 'https://avans-nx-matthijs.azurewebsites.net/api/';
 
 
     constructor(private readonly http: HttpClient) {}
