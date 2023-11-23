@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, IUser } from '@avans-nx-workshop/shared/api';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment.prod';
+import { environment } from '@fst/shared/util-env';
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
@@ -19,8 +19,7 @@ export const httpOptions = {
  */
 @Injectable()
 export class UserService{
-     //endpoint = 'http://localhost:3000/api/';
-     endpoint = 'https://avans-nx-matthijs.azurewebsites.net/api/';
+     endpoint = environment.apiUrl;
 
 
     constructor(private readonly http: HttpClient) {}
