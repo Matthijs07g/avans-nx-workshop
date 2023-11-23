@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { ICircuit } from '@avans-nx-workshop/shared/api';
 import { BehaviorSubject } from 'rxjs';
 import { Logger } from '@nestjs/common';
+import { error } from 'console';
 
 @Injectable()
 export class CircuitService {
@@ -69,10 +70,75 @@ export class CircuitService {
         const current = this.circuits$.value;
         // Use the incoming data, a randomized ID, and a default value of `false` to create the new to-do
         const newCircuit: ICircuit = {
-            ...circuit,
-            id: `user-${Math.floor(Math.random() * 10000)}`
+            id: `circuit-${Math.floor(Math.random() * 10000)}`,
+            ...circuit
+            
         };
         this.circuits$.next([...current, newCircuit]);
         return newCircuit;
+    }
+
+    update(id: string, circuit: Pick<ICircuit, 'name' | 'location' | 'length' | 'mapIMG' >): ICircuit {
+        Logger.log(`Update(${id})`, this.TAG);
+        let check = null
+        const current = this.circuits$.value;
+        const newCircuit: ICircuit = {
+            id: id,
+            ...circuit
+        };
+        current.forEach(circuit => {
+            if(circuit.id == newCircuit.id){
+                circuit.name = newCircuit.name;
+                circuit.location = newCircuit.location;
+                circuit.length = newCircuit.length;
+                circuit.mapIMG = newCircuit.mapIMG;
+                check = circuit
+            }
+        });
+        if(!check){
+            throw new NotFoundException('Circuit not found')
+        }
+        return newCircuit;
+    }
+
+    delete(id: string): ICircuit{
+        Logger.log(`Delete(${id})`, this.TAG);
+        console.log(id)
+        const circuit = this.circuits$.value.find((td) => td.id === id);
+        if (!circuit) {
+            throw new NotFoundException(`User could not be found!`);
+        }
+        const circuits = this.circuits$.value
+        const updatedCircuits = circuits.filter(circuit => circuit.id !== id);
+        this.circuits$.next(updatedCircuits);
+        return circuit;
+    
+
+
+
+
+
+
+
+
+        // const target = this.circuits$.value.find((td) => td.id === id);
+        // const circuits = this.circuits$.value
+        // const newList = new BehaviorSubject<ICircuit[]>([]);
+        
+        
+        // for (let i = 0; i < circuits.length; i++) {
+            
+        //     if(target != circuits[i]){
+        //         // console.log(target);
+        //         // console.log('============================');
+        //         // console.log(circuits[i]);
+        //         const current = newList.value
+        //         newList.next([...current, circuits[i]])
+        //     }
+            
+        // }
+        // this.circuits$ = newList;
+        // return target;
+        
     }
 }

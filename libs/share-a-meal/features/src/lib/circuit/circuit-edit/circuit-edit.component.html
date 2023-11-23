@@ -31,11 +31,11 @@
             </div>
             <br>
             <button type="submit" class="btn btn-primary save">Save Changes</button>
-            <button class="btn btn-primary delete" routerLink="/circuit">Cancel</button>
+            <button class="btn btn-primary delete" routerLink="/circuit/{{circuit.id}}">Cancel</button>
           </form>
   
           <!-- Navigation buttons --><br><br>
-          <button class="btn btn-secondary back" routerLink="/circuit">Back to Circuit list </button>
+          <button class="btn btn-secondary back" routerLink="/circuit/{{circuit.id}}">Done</button>
           
         </div>
       </div>
@@ -46,19 +46,19 @@
       <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
         <div class="form-group">
           <label for="Name">Name:</label>
-          <input type="text" id="Name" name="Name" placeholder="Circuit name" class="form-control" required>
+          <input type="text" id="Name" name="Name" placeholder="Circuit name" class="form-control" [(ngModel)]="Name" required>
         </div>
         <div class="form-group">
           <label for="Locatie">Locatie:</label>
-          <input type="text" id="Locatie" name="Locatie" placeholder="Locatie" class="form-control" required>
+          <input type="text" id="Locatie" name="Locatie" placeholder="Locatie" class="form-control" [(ngModel)]="Locatie" required>
         </div>
         <div class="form-group">
           <label for="Length">Length:</label>
-          <input type="text" id="Length" name="Length" placeholder="Length" class="form-control" required>
+          <input type="text" id="Length" name="Length" placeholder="Length" class="form-control" [(ngModel)]="Length" required>
         </div>
         <div class="form-group">
           <label for="mapIMG">Map Url:</label>
-          <input type="text" id="mapIMG" name="mapIMG" placeholder="Url" class="form-control" required>
+          <input type="text" id="mapIMG" name="mapIMG" placeholder="Url" class="form-control" [(ngModel)]="mapIMG" required>
         </div>
         <br>
         <button type="submit" class="btn btn-primary save">Create</button>

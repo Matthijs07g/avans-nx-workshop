@@ -30,7 +30,7 @@ export class CircuitService{
      * @options options - optional URL queryparam options
      */
     public list(options?: any): Observable<ICircuit[] | null> {
-        console.log(`list ${this.endpoint}`);
+        console.log(`list ${this.endpoint}circuit`);
 
         return this.http
             .get<ApiResponse<ICircuit[]>>(this.endpoint+'circuit', {
@@ -49,7 +49,7 @@ export class CircuitService{
      *
      */
     public read(id: string | null, options?: any): Observable<ICircuit> {
-        console.log(`read ${this.endpoint}/${id}`);
+        console.log(`read ${this.endpoint}circuit/${id}`);
         return this.http
             .get<ApiResponse<ICircuit>>(this.endpoint+'circuit/'+id, {
                 ...options,
@@ -60,6 +60,48 @@ export class CircuitService{
                 map((response: any) => response.results as ICircuit),
                 catchError(this.handleError)
             );
+    }
+
+    //Post Item
+    public create(name: string, location: string, length: number, mapIMG: string): Observable<ICircuit>{
+        console.log(`post ${this.endpoint}circuit`);
+        return this.http
+            .post<ApiResponse<ICircuit>>(this.endpoint+'circuit', {
+                name, location, length, mapIMG,
+            })
+            .pipe(
+                tap(console.log),
+                map((response: any) => response.results as ICircuit),
+                catchError(this.handleError)
+            )
+    }
+
+    //Put Item
+    public update(id:string | null, name: string | undefined, location: string | undefined, length: number | undefined, mapIMG: string | undefined): Observable<ICircuit>{
+        console.log(`put ${this.endpoint}circuit`);
+        return this.http
+            .put<ApiResponse<ICircuit>>(this.endpoint+'circuit/'+id, {
+                name, location, length, mapIMG,
+            })
+            .pipe(
+                tap(console.log),
+                map((response: any) => response.results as ICircuit),
+                catchError(this.handleError)
+            )
+    }
+
+    public delete(id: string| null, options?: any){
+        console.log(`delete ${this.endpoint}circuit/${id}`)
+        return this.http
+            .delete<ApiResponse<ICircuit>>(this.endpoint+'circuit/'+id, {
+                ...options,
+                ...httpOptions,
+            })
+            .pipe(
+                tap(console.log),
+                map((respone: any) => respone.results as ICircuit),
+                catchError(this.handleError)
+            )
     }
 
     /**
