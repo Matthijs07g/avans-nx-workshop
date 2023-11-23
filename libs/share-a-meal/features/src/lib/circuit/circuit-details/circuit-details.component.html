@@ -1,1 +1,21 @@
-<p>circuit-details works!</p>
+<!-- user-detail.component.html -->
+
+<div class="container">
+    <div *ngIf="circuit">
+      <div class="row">
+        <div class="col-md-6">
+          <img [src]="circuit.mapIMG" class="img-fluid" alt="profile">
+        </div>
+        <div class="col-md-6">
+          <h2>{{ circuit.name }}</h2>
+          <p>Locatie: {{ circuit.location }}</p>
+          <p>Lengte: {{circuit.length}}Km</p>
+
+          <button class="btn btn-primary back" routerLink="/circuit">Back to Circuit List</button>
+          <button class="btn btn-primary edit" routerLink="edit">Edit</button>
+          <button class="btn btn-primary delete" routerLink="/circuit">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

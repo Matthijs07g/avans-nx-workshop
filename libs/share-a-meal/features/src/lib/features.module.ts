@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { CircuitListComponent } from './circuit/circuit-list/circuit-list.component';
 import { CircuitDetailsComponent } from './circuit/circuit-details/circuit-details.component';
 import { CircuitEditComponent } from './circuit/circuit-edit/circuit-edit.component';
+import { CircuitService } from './circuit/circuit.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterLink, FormsModule],
@@ -28,7 +29,7 @@ import { CircuitEditComponent } from './circuit/circuit-edit/circuit-edit.compon
     CircuitDetailsComponent,
     CircuitEditComponent,
   ],
-  providers: [MealService, UserService],
+  providers: [MealService, UserService, CircuitService],
   exports: [
     MealListComponent,
     MealDetailComponent,
