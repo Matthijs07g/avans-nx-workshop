@@ -29,5 +29,5 @@
       "@avans-nx-workshop/ui": ["libs/share-a-meal/ui/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"],
+  "exclude": ["node_modules", "tmp"]
 }

@@ -11,6 +11,9 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserService } from './user/user.service';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CircuitListComponent } from './circuit/circuit-list/circuit-list.component';
+import { CircuitDetailsComponent } from './circuit/circuit-details/circuit-details.component';
+import { CircuitEditComponent } from './circuit/circuit-edit/circuit-edit.component';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterLink, FormsModule],
@@ -21,14 +24,21 @@ import { FormsModule } from '@angular/forms';
     UserListComponent,
     UserDetailsComponent,
     UserEditComponent,
+    CircuitListComponent,
+    CircuitDetailsComponent,
+    CircuitEditComponent,
   ],
   providers: [MealService, UserService],
   exports: [
-    MealListComponent, 
-    MealDetailComponent, 
-    AboutPageComponent, 
-    UserDetailsComponent, 
-    UserEditComponent, 
-    UserListComponent],
+    MealListComponent,
+    MealDetailComponent,
+    AboutPageComponent,
+    UserDetailsComponent,
+    UserEditComponent,
+    UserListComponent,
+    CircuitListComponent,
+    CircuitDetailsComponent,
+    CircuitEditComponent,
+  ],
 })
 export class FeaturesModule {}
