@@ -62,6 +62,47 @@ export class UserService{
             );
     }
 
+    public create(firstName: string, lastName: string, picture: string, emailadres: string, pass: string, birthdate: string): Observable<IUser>{
+        console.log(`post ${this.endpoint}user`);
+        return this.http
+            .post<ApiResponse<IUser>>(this.endpoint+'user', {
+                firstName, lastName, picture, emailadres, pass, birthdate
+            })
+            .pipe(
+                tap(console.log),
+                map((response: any) => response.results as IUser),
+                catchError(this.handleError)
+            )
+    }
+
+    //Put Item
+    public update(id:string | null, firstName: string | undefined, lastName: string | undefined, picture: string | undefined, emailadres: string | undefined, password: string | undefined, birthdate:string | undefined, role: string | undefined): Observable<IUser>{
+        console.log(`put ${this.endpoint}user`);
+        return this.http
+            .put<ApiResponse<IUser>>(this.endpoint+'user/'+id, {
+                firstName, lastName, picture, emailadres, password, birthdate, role
+            })
+            .pipe(
+                tap(console.log),
+                map((response: any) => response.results as IUser),
+                catchError(this.handleError)
+            )
+    }
+
+    public delete(id: string| null, options?: any){
+        console.log(`delete ${this.endpoint}user/${id}`)
+        return this.http
+            .delete<ApiResponse<IUser>>(this.endpoint+'user/'+id, {
+                ...options,
+                ...httpOptions,
+            })
+            .pipe(
+                tap(console.log),
+                map((respone: any) => respone.results as IUser),
+                catchError(this.handleError)
+            )
+    }
+
     /**
      * Handle errors.
      */

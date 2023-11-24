@@ -15,7 +15,7 @@ export interface IUser {
     lastName: string;
     picture: string;
     emailadres: string;
-    birthdate: Date;
+    birthdate: string;
     role: Roles;
     pass: string;
     friends: User[]

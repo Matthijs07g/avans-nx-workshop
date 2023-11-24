@@ -32,9 +32,9 @@
           </div>
           <div class="form-group">
             <label for="role">Role:</label>
-            <select id="role" name="role" [(ngModel)]="user.role" class="form-control" required>
+            <select id="role" name="role"  [(ngModel)]="user.role" class="form-control" required>
               <option value="Admin">Admin</option>
-              <option value="User">User</option>
+              <option value="Guest">Guest</option>
             </select>
           </div>
           <div class="form-group">
@@ -58,30 +58,27 @@
     <form (ngSubmit)="onSubmit()" #userForm="ngForm">
       <div class="form-group">
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" placeholder="first name" class="form-control" required>
+        <input type="text" id="firstName" name="firstName" placeholder="first name" [(ngModel)]="Firstname" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" placeholder="last name" class="form-control" required>
+        <input type="text" id="lastName" name="lastName" placeholder="last name" [(ngModel)]="Lastname" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="email" class="form-control" required>
+        <input type="email" id="email" name="email" placeholder="email" [(ngModel)]="Email" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="birthdate">Birthdate:</label>
-        <input type="date" id="birthdate" name="birthdate" placeholder="birthdate" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="role">Role:</label>
-        <select id="role" name="role"  class="form-control" required>
-          <option value="Admin">Admin</option>
-          <option value="Guest">Guest</option>
-        </select>
+        <input type="date" id="birthdate" name="birthdate" placeholder="birthdate" [(ngModel)]="birthday" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="picture">Image url:</label>
-        <input type="text" id="image" name="image" placeholder="URL" class="form-control" required>
+        <input type="text" id="image" name="image" placeholder="URL" [(ngModel)]="PictureUrl" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="password" [(ngModel)]="passWord" class="form-control" required>
       </div>
       <br>
       <button type="submit" class="btn btn-primary save">Create</button>

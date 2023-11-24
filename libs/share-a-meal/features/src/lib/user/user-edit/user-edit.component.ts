@@ -15,6 +15,12 @@ export class UserEditComponent implements OnInit, OnDestroy {
   user: IUser | null = null;
   subscription: Subscription | undefined = undefined;
   id: string | null = null;
+  Firstname = '';
+  Lastname = '';
+  PictureUrl = '';
+  Email = '';
+  passWord = '';
+  birthday = '';
 
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService){}
 
@@ -34,9 +40,26 @@ export class UserEditComponent implements OnInit, OnDestroy {
         if (this.subscription) this.subscription.unsubscribe();
     }
 
-  onSubmit() {
-    // Here you can call your user service to update the user details
-    // For demonstration purposes, you can log the updated user object
-    console.log("User details updated:");
+    onSubmit(): void {
+      this.id = this.route.snapshot.paramMap.get('id');
+      if(this.id == null){
+        this.userService.create(this.Firstname, this.Lastname, this.PictureUrl, this.Email, this.passWord, this.birthday).subscribe((results) =>{
+          console.log(`result: ${results}`);
+          this.user = results;
+          this.router.navigate(['/user/'+this.user.id]);
+        })
+        
+      }else if(this.id !=null){
+        this.userService.update(this.id, this.user?.firstName, this.user?.lastName, this.user?.picture, this.user?.emailadres, this.user?.pass, this.user?.birthdate, this.user?.role).subscribe((results) =>{
+          console.log(`result: ${results}`);
+          this.router.navigate(['/user/'+this.id]);
+        })
+        
+      }
+  
+  
+      // Here you can call your user service to update the user details
+      // For demonstration purposes, you can log the updated user object
+      console.log("User details updated:");
   }
 }

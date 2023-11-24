@@ -24,4 +24,11 @@ export class UserDetailsComponent implements OnInit {
         this.user = results;
     });
   }
+  del() : void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.subscription = this.userService.delete(this.id).subscribe((results) => {
+      console.log(`result: ${results}`);
+      this.router.navigate(['user'])
+    })
+  }
 }

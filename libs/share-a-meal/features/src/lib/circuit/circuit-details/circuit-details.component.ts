@@ -33,7 +33,5 @@ del() : void {
     console.log(`result: ${results}`);
     this.router.navigate(['circuit'])
   })
-
-  
 }
 }

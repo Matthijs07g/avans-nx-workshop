@@ -57,7 +57,7 @@ export class CircuitEditComponent {
 
     // Here you can call your user service to update the user details
     // For demonstration purposes, you can log the updated user object
-    console.log("User details updated:");
+    console.log("Circuit details updated:");
 }
 }
 

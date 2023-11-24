@@ -111,34 +111,6 @@ export class CircuitService {
         const circuits = this.circuits$.value
         const updatedCircuits = circuits.filter(circuit => circuit.id !== id);
         this.circuits$.next(updatedCircuits);
-        return circuit;
-    
-
-
-
-
-
-
-
-
-        // const target = this.circuits$.value.find((td) => td.id === id);
-        // const circuits = this.circuits$.value
-        // const newList = new BehaviorSubject<ICircuit[]>([]);
-        
-        
-        // for (let i = 0; i < circuits.length; i++) {
-            
-        //     if(target != circuits[i]){
-        //         // console.log(target);
-        //         // console.log('============================');
-        //         // console.log(circuits[i]);
-        //         const current = newList.value
-        //         newList.next([...current, circuits[i]])
-        //     }
-            
-        // }
-        // this.circuits$ = newList;
-        // return target;
-        
+        return circuit; 
     }
 }
