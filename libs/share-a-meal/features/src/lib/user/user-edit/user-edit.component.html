@@ -43,15 +43,13 @@
           </div>
           <br>
           <button type="submit" class="btn btn-primary save">Save Changes</button>
-          <button class="btn btn-primary delete" routerLink="/user">Cancel</button>
+          <button class="btn btn-primary delete" routerLink='/user/{{user.id}}'>Cancel</button>
         </form>
-
-        <!-- Navigation buttons --><br><br>
-        <button class="btn btn-secondary back" routerLink="/user">Back to User list </button>
-        
       </div>
     </div>
   </div>
+
+
   <div *ngIf="!user">
     <h4>Add user</h4>
     <!-- Edit Form -->

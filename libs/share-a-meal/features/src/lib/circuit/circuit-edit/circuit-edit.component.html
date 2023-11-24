@@ -33,13 +33,11 @@
             <button type="submit" class="btn btn-primary save">Save Changes</button>
             <button class="btn btn-primary delete" routerLink="/circuit/{{circuit.id}}">Cancel</button>
           </form>
-  
-          <!-- Navigation buttons --><br><br>
-          <button class="btn btn-secondary back" routerLink="/circuit/{{circuit.id}}">Done</button>
-          
         </div>
       </div>
     </div>
+
+    
     <div *ngIf="!circuit">
       <h4>Add circuit</h4>
       <!-- Edit Form -->
