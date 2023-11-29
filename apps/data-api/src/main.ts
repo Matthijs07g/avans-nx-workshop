@@ -3,7 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ApiResponseInterceptor} from '@avans-nx-workshop/backend/dto'
 import { AppModule } from './app/app.module';
@@ -17,13 +17,16 @@ async function bootstrap() {
   const corsOptions: CorsOptions = {};
   app.enableCors(corsOptions);
 
-  app.useGlobalInterceptors(new ApiResponseInterceptor())
+  app.useGlobalInterceptors(new ApiResponseInterceptor());
+  app.useGlobalPipes(new ValidationPipe());
 
+  // General exception handling
+  // app.useGlobalFilters(new HttpExceptionFilter());
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
   Logger.log(
-    `🚀 Application data-api is running on: http://localhost:${port}/${globalPrefix}`
+      `🚀 DATA-API server is running on: http://localhost:${port}/${globalPrefix}`
   );
 }
 

@@ -9,4 +9,4 @@ import { CircuitService } from './circuit/circuit.service';
   providers: [UserService, CircuitService],
   exports: [UserService, CircuitService],
 })
-export class UserModule {}
+export class backendFeaturesModule {}
