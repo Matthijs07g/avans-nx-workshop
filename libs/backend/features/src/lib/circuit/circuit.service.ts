@@ -3,61 +3,36 @@ import { ICircuit } from '@avans-nx-workshop/shared/api';
 import { BehaviorSubject } from 'rxjs';
 import { Logger } from '@nestjs/common';
 import { error } from 'console';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { CircuitDocument, Circuit as CircuitModel } from './circut.shema';
+import { UpdateCircuitDto } from '@avans-nx-workshop/backend/dto';
 
 @Injectable()
 export class CircuitService {
     TAG = 'CircuitService';
 
-    private circuits$ = new BehaviorSubject<ICircuit[]>([
-        {
-            id: '0',
-            name: 'CM.com Circuit Zandvoort',
-            location: 'Zandvoort, Nederland',
-            length: 4259,
-            mapIMG: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Zandvoort_Circuit.png/1024px-Zandvoort_Circuit.png'
-        },
-        {
-            id: '1',
-            name: 'Circuit de Spa-Francorchamps',
-            location: 'Stavelot, België',
-            length: 7004,
-            mapIMG: 'https://upload.wikimedia.org/wikipedia/commons/1/11/Circuit_Spa_2007.png'
-        },
-        {
-            id: '2',
-            name: 'Autodromo Nazionale Monza',
-            location: 'Monza, Italië',
-            length: 5793,
-            mapIMG: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Monza_track_map.svg/1920px-Monza_track_map.svg.png'
-        },
-        {
-            id: '3',
-            name: 'Yas Marina Circuit',
-            location: 'Yas, Verenigde Arabische Emiraten',
-            length: 5281,
-            mapIMG: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Yas_Marina_Circuit.png/1920px-Yas_Marina_Circuit.png'
-        },
-        {
-            id: '4',
-            name: 'Autódromo José Carlos Pace',
-            location: 'São Paulo, Brazillië',
-            length: 4309,
-            mapIMG: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Circuit_Interlagos.svg/1024px-Circuit_Interlagos.svg.png'
-        },
-    ]);
+    constructor(
+        @InjectModel(CircuitModel.name) private circuitModel: Model<CircuitDocument>
+    ) {}
 
-    getAll(): ICircuit[] {
+
+    async getAll(): Promise<ICircuit[]> {
         Logger.log('getAll', this.TAG);
-        return this.circuits$.value;
+        const items = await this.circuitModel
+            .find()
+            //.populate('Circuit', 'name location length mapIMG')  for references
+            .exec();
+        return items;
     }
 
-    getOne(id: string): ICircuit {
-        Logger.log(`getOne(${id})`, this.TAG);
-        const circuit = this.circuits$.value.find((td) => td.id === id);
-        if (!circuit) {
-            throw new NotFoundException(`User could not be found!`);
+    async getOne(_id: string): Promise<ICircuit | null> {
+        Logger.log(`getOne(${_id})`, this.TAG);
+        const item = await this.circuitModel.findOne({ _id }).exec();
+        if(!item){
+            Logger.debug('Circuit not found');
         }
-        return circuit;
+        return item;
     }
 
     /**
@@ -65,52 +40,29 @@ export class CircuitService {
      * return signature - we still want to respond with the complete
      * object
      */
-    create(circuit: Pick<ICircuit, 'name' | 'location' | 'length' | 'mapIMG' >): ICircuit {
+    async create(req: any): Promise<ICircuit | null> {
         Logger.log('create', this.TAG);
-        const current = this.circuits$.value;
-        // Use the incoming data, a randomized ID, and a default value of `false` to create the new to-do
-        const newCircuit: ICircuit = {
-            id: `circuit-${Math.floor(Math.random() * 10000)}`,
-            ...circuit
-            
-        };
-        this.circuits$.next([...current, newCircuit]);
-        return newCircuit;
+        const circuit = req.body;
+        //const circuit_id = req.circuit.circuit_id     for authorisatie
+
+        if(circuit){
+            Logger.log(`Create Circuit ${circuit.name}`);
+            const ceratedItem = {
+                ...circuit
+            };
+            return this.circuitModel.create(ceratedItem);
+        }
+        return null;
     }
 
-    update(id: string, circuit: Pick<ICircuit, 'name' | 'location' | 'length' | 'mapIMG' >): ICircuit {
-        Logger.log(`Update(${id})`, this.TAG);
-        let check = null
-        const current = this.circuits$.value;
-        const newCircuit: ICircuit = {
-            id: id,
-            ...circuit
-        };
-        current.forEach(circuit => {
-            if(circuit.id == newCircuit.id){
-                circuit.name = newCircuit.name;
-                circuit.location = newCircuit.location;
-                circuit.length = newCircuit.length;
-                circuit.mapIMG = newCircuit.mapIMG;
-                check = circuit
-            }
-        });
-        if(!check){
-            throw new NotFoundException('Circuit not found')
-        }
-        return newCircuit;
+    async update(_id: string, circuit: UpdateCircuitDto): Promise<ICircuit | null> {
+        Logger.log(`Update Circuit (${circuit.name})`, this.TAG);
+        return this.circuitModel.findByIdAndUpdate({ _id }, circuit);
+
     }
 
-    delete(id: string): ICircuit{
-        Logger.log(`Delete(${id})`, this.TAG);
-        console.log(id)
-        const circuit = this.circuits$.value.find((td) => td.id === id);
-        if (!circuit) {
-            throw new NotFoundException(`User could not be found!`);
-        }
-        const circuits = this.circuits$.value
-        const updatedCircuits = circuits.filter(circuit => circuit.id !== id);
-        this.circuits$.next(updatedCircuits);
-        return circuit; 
+    async delete(_id: string){
+        Logger.log(`Delete Meal (${_id})`, this.TAG);
+        return this.circuitModel.findByIdAndDelete({ _id });
     }
 }

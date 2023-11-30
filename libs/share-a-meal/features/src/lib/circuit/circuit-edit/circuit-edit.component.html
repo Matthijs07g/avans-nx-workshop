@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
               <label for="Length">Length:</label>
-              <input type="text" id="Length" name="Length" [(ngModel)]="circuit.length" class="form-control" required>
+              <input type="number" id="Length" name="Length" [(ngModel)]="circuit.length" class="form-control" required>
             </div>
             <div class="form-group">
               <label for="mapIMG">Map Url:</label>
@@ -31,7 +31,7 @@
             </div>
             <br>
             <button type="submit" class="btn btn-primary save">Save Changes</button>
-            <button class="btn btn-primary delete" routerLink="/circuit/{{circuit.id}}">Cancel</button>
+            <button class="btn btn-primary delete" routerLink="/circuit/{{circuit._id}}">Cancel</button>
           </form>
         </div>
       </div>
@@ -40,7 +40,7 @@
     
     <div *ngIf="!circuit">
       <h4>Add circuit</h4>
-      <!-- Edit Form -->
+      <!-- Add Form -->
       <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
         <div class="form-group">
           <label for="Name">Name:</label>
@@ -52,7 +52,7 @@
         </div>
         <div class="form-group">
           <label for="Length">Length:</label>
-          <input type="text" id="Length" name="Length" placeholder="Length" class="form-control" [(ngModel)]="Length" required>
+          <input type="number" id="Length" name="Length" placeholder="Length" class="form-control" [(ngModel)]="Length" required>
         </div>
         <div class="form-group">
           <label for="mapIMG">Map Url:</label>

@@ -1,10 +1,10 @@
-import { Id } from './id.type';
+import { IResourceId, Id } from './id.type';
 
 // Voor nu is onze user een string; later zullen we hier een User object van maken.
 //type User = string;
 
 export interface ICircuit {
-    id: Id;
+    _id: Id;
     name: string;
     location: string;
     length: number;

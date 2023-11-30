@@ -39,7 +39,7 @@ export class CreateCircuitDto implements ICreateCircuit {
 export class UpsertCircuitDto implements IUpsertCircuit {
     @IsString()
     @IsNotEmpty()
-    id!: string;
+    _id!: string;
 
     @IsString()
     @IsNotEmpty()

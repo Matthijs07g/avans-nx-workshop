@@ -12,7 +12,7 @@ import { CircuitService } from '../circuit.service';
 export class CircuitEditComponent {
   circuit: ICircuit | null = null;
   subscription: Subscription | undefined = undefined;
-  id: string | null = null;
+  _id: string | null = null;
   Name = '';
   Locatie= '';
   Length = 0;
@@ -23,10 +23,10 @@ export class CircuitEditComponent {
 
   ngOnInit(): void {
     
-    this.id = this.route.snapshot.paramMap.get('id');
-    if(this.id != null){
-      console.log(this.id)
-      this.subscription = this.circuitService.read(this.id).subscribe((results) => {
+    this._id = this.route.snapshot.paramMap.get('id');
+    if(this._id != null){
+      console.log(this._id)
+      this.subscription = this.circuitService.read(this._id).subscribe((results) => {
         console.log(`results: ${results}`);
         this.circuit = results;
       });
@@ -38,18 +38,18 @@ export class CircuitEditComponent {
     }
 
   onSubmit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    if(this.id == null){
+    this._id = this.route.snapshot.paramMap.get('id');
+    if(this._id == null){
       this.circuitService.create(this.Name, this.Locatie, this.Length, this.mapIMG).subscribe((results) =>{
         console.log(`result: ${results}`);
         this.circuit = results;
         this.router.navigate(['/circuit']);
       })
       
-    }else if(this.id !=null){
-      this.circuitService.update(this.id, this.circuit?.name, this.circuit?.location, this.circuit?.length, this.circuit?.mapIMG).subscribe((results) =>{
+    }else if(this._id !=null){
+      this.circuitService.update(this._id, this.circuit?.name, this.circuit?.location, this.circuit?.length, this.circuit?.mapIMG).subscribe((results) =>{
         console.log(`result: ${results}`);
-        this.router.navigate(['/circuit/'+this.id]);
+        this.router.navigate(['/circuit/'+this._id]);
       })
       
     }

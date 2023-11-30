@@ -77,10 +77,10 @@ export class CircuitService{
     }
 
     //Put Item
-    public update(id:string | null, name: string | undefined, location: string | undefined, length: number | undefined, mapIMG: string | undefined): Observable<ICircuit>{
-        console.log(`put ${this.endpoint}circuit`);
+    public update(_id:string | null, name: string | undefined, location: string | undefined, length: number | undefined, mapIMG: string | undefined): Observable<ICircuit>{
+        console.log(`put ${this.endpoint}circuit${_id}`);
         return this.http
-            .put<ApiResponse<ICircuit>>(this.endpoint+'circuit/'+id, {
+            .put<ApiResponse<ICircuit>>(this.endpoint+'circuit/'+_id, {
                 name, location, length, mapIMG,
             })
             .pipe(

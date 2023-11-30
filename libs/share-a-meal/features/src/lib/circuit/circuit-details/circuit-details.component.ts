@@ -18,9 +18,11 @@ constructor(private route: ActivatedRoute, private router: Router, private circu
 
 ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
+    console.log(this.id)
     this.subscription = this.circuitService.read(this.id).subscribe((results) => {
       console.log(`results: ${results}`);
       this.circuit = results;
+
   });
 }
 ngOnDestroy(): void {
