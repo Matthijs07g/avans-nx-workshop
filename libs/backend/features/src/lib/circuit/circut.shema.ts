@@ -22,4 +22,4 @@ export class Circuit implements ICircuit {
     mapIMG!: string;
 }
 
-export const CricuitSchema = SchemaFactory.createForClass(Circuit)
+export const CircuitSchema = SchemaFactory.createForClass(Circuit)
