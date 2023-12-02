@@ -46,23 +46,23 @@ export class TeamService {
         //const Team_id = req.Team.Team_id     for authorisatie
 
         if(team){
-            Logger.log(`Create Circuit ${team.name}`);
-            const ceratedItem = {
+            Logger.log(`Create Team ${team.name}`);
+            const createdItem = {
                 ...team
             };
-            return this.teamModel.create(ceratedItem);
+            return this.teamModel.create(createdItem);
         }
         return null;
     }
 
-    async update(_id: string, circuit: UpdateTeamDto): Promise<ITeam | null> {
-        Logger.log(`Update Circuit (${circuit.name})`, this.TAG);
-        return this.teamModel.findByIdAndUpdate({ _id }, circuit);
+    async update(_id: string, team: UpdateTeamDto): Promise<ITeam | null> {
+        Logger.log(`Update Team (${team.name})`, this.TAG);
+        return this.teamModel.findByIdAndUpdate({ _id }, team);
 
     }
 
     async delete(_id: string){
-        Logger.log(`Delete Meal (${_id})`, this.TAG);
+        Logger.log(`Delete Team (${_id})`, this.TAG);
         return this.teamModel.findByIdAndDelete({ _id });
     }
 }

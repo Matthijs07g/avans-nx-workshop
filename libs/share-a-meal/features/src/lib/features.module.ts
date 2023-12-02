@@ -15,6 +15,10 @@ import { CircuitListComponent } from './circuit/circuit-list/circuit-list.compon
 import { CircuitDetailsComponent } from './circuit/circuit-details/circuit-details.component';
 import { CircuitEditComponent } from './circuit/circuit-edit/circuit-edit.component';
 import { CircuitService } from './circuit/circuit.service';
+import { TeamListComponent } from './team/team-list/team-list.component';
+import { TeamEditComponent } from './team/team-edit/team-edit.component';
+import { TeamDetailsComponent } from './team/team-details/team-details.component';
+import { TeamService } from './team/team.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterLink, FormsModule],
@@ -28,8 +32,11 @@ import { CircuitService } from './circuit/circuit.service';
     CircuitListComponent,
     CircuitDetailsComponent,
     CircuitEditComponent,
+    TeamListComponent,
+    TeamEditComponent,
+    TeamDetailsComponent,
   ],
-  providers: [MealService, UserService, CircuitService],
+  providers: [MealService, UserService, CircuitService, TeamService],
   exports: [
     MealListComponent,
     MealDetailComponent,
@@ -40,6 +47,9 @@ import { CircuitService } from './circuit/circuit.service';
     CircuitListComponent,
     CircuitDetailsComponent,
     CircuitEditComponent,
+    TeamListComponent,
+    TeamEditComponent,
+    TeamDetailsComponent
   ],
 })
 export class FeaturesModule {}

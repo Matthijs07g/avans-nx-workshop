@@ -24,11 +24,15 @@ export class CreateTeamDto implements ICreateTeam {
 
     @IsString()
     @IsNotEmpty()
-    Owner!: string;
+    owner!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    country!: string;
 
     @IsNumber()
     @IsNotEmpty()
-    Constructor_champions!: number;
+    constructor_champions!: number;
 
     @IsString()
     @IsNotEmpty()
@@ -50,11 +54,15 @@ export class UpsertTeamDto implements IUpsertTeam {
 
     @IsString()
     @IsNotEmpty()
-    Owner!: string;
+    owner!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    country!: string;
 
     @IsNumber()
     @IsNotEmpty()
-    Constructor_champions!: number;
+    constructor_champions!: number;
 
     @IsString()
     @IsNotEmpty()
@@ -72,11 +80,15 @@ export class UpdateTeamDto implements IUpdateTeam {
 
     @IsString()
     @IsNotEmpty()
-    Owner!: string;
+    owner!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    country!: string;
 
     @IsNumber()
     @IsNotEmpty()
-    Constructor_champions!: number;
+    constructor_champions!: number;
 
     @IsString()
     @IsNotEmpty()

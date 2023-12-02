@@ -13,10 +13,13 @@ export class Team implements ITeam {
     name!: string;
 
     @Prop({ required: true})
-    Owner!: string;
+    owner!: string;
+
+    @Prop({ required: true })
+    country!: string;
 
     @Prop({ required: true})
-    Constructor_champions!: number;
+    constructor_champions!: number;
 
     @Prop({ required: true})
     dateFounded!: string;

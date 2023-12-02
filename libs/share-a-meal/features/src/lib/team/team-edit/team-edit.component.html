@@ -1,0 +1,85 @@
+<!-- user-detail.component.html -->
+
+<div class="container">
+    <div *ngIf="team">
+      <div class="row">
+        <div class="col-md-6">
+          <img [src]="team.iconImg" class="img-fluid" alt="profile">
+        </div>
+        <div class="col-md-6">
+          <h2>{{ team.name }}</h2>
+          <p>Locatie: {{ team.owner }}</p>
+          <p>Nationaliteit: {{ team.country }}</p>
+          <p>Lengte: {{ team.dateFounded }}Km</p>
+          <p>Kampioen: {{ team.constructor_champions }}</p>
+  
+          <!-- Edit Form -->
+          <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
+            <div class="form-group">
+              <label for="Name">Naam:</label>
+              <input type="text" id="Name" name="Name" [(ngModel)]="team.name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="Owner">Eigenaar:</label>
+              <input type="text" id="Owner" name="Owner" [(ngModel)]="team.owner" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="Country">Nationaliteit:</label>
+                <input type="text" id="Country" name="Country" [(ngModel)]="team.country" class="form-control" required>
+              </div>
+            <div class="form-group">
+              <label for="Champion">Kampioenshappen:</label>
+              <input type="number" id="Champion" name="Champion" [(ngModel)]="team.constructor_champions" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="dateFounded">Datum oprichting:</label>
+              <input type="text" id="dateFounded" name="dateFounded" [(ngModel)]="team.dateFounded" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="iconIMG">Logo Url:</label>
+                <input type="text" id="iconIMG" name="iconIMG" [(ngModel)]="team.iconImg" class="form-control" required>
+              </div>
+            <br>
+            <button type="submit" class="btn btn-primary save">Save Changes</button>
+            <button class="btn btn-primary delete" routerLink="/team/{{team._id}}">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    
+    <div *ngIf="!team">
+      <h4>Add circuit</h4>
+      <!-- Add Form -->
+      <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
+        <div class="form-group">
+          <label for="Name">Naam:</label>
+          <input type="text" id="Name" name="Name" placeholder="Team naam" class="form-control" [(ngModel)]="Name" required>
+        </div>
+        <div class="form-group">
+          <label for="Owner">Oprichter:</label>
+          <input type="text" id="Owner" name="Owner" placeholder="Eigenaar" class="form-control" [(ngModel)]="Owner" required>
+        </div>
+        <div class="form-group">
+            <label for="Country">Nationaliteit:</label>
+            <input type="text" id="Country" name="Country" placeholder="Nationaliteit" [(ngModel)]="Country" class="form-control" required>
+          </div>
+        <div class="form-group">
+          <label for="Champion">Kampioenshappen</label>
+          <input type="number" id="Champion" name="Champion" placeholder="" class="form-control" [(ngModel)]="ConstructorChampions" required>
+        </div>
+        <div class="form-group">
+          <label for="Founded">Datum oprichting:</label>
+          <input type="text" id="Founded" name="Founded" placeholder="oprichting" class="form-control" [(ngModel)]="Founded" required>
+        </div>
+        <div class="form-group">
+            <label for="iconIMG">Logo Url:</label>
+            <input type="text" id="iconIMG" name="iconIMG" placeholder="Url" class="form-control" [(ngModel)]="iconIMG" required>
+          </div>
+        <br>
+        <button type="submit" class="btn btn-primary save">Create</button>
+        <button class="btn btn-primary delete" routerLink="/team">Cancel</button>
+      </form>
+    </div>
+  </div>
+  

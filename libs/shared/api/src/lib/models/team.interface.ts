@@ -6,16 +6,17 @@ import { Id } from './id.type';
 export interface ITeam {
     _id: Id;
     name: string;
-    Owner: string;
-    Constructor_champions: number;
+    owner: string;
+    country: string;
+    constructor_champions: number;
     dateFounded: string;
     iconImg: string;
 }
 
 export type ICreateTeam = Pick<
     ITeam,
-    'name' | 'Owner' | 'Constructor_champions' | 'dateFounded' | 'iconImg'
+    'name' | 'owner' | 'country' | 'constructor_champions' | 'dateFounded' | 'iconImg'
 >;
-export type IUpdateTeam = Partial<Omit<ITeam, 'id'>>;
+export type IUpdateTeam = Partial<Omit<ITeam, '_id'>>;
 export type IUpsertTeam = ITeam;
 

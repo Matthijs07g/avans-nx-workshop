@@ -2,7 +2,7 @@
 import { Route } from '@angular/router';
 import { 
         AboutPageComponent, 
-        MealListComponent 
+         
     } from '@avans-nx-workshop/share-a-meal/features';
 import { CircuitDetailsComponent } from 'libs/share-a-meal/features/src/lib/circuit/circuit-details/circuit-details.component';
 import { CircuitEditComponent } from 'libs/share-a-meal/features/src/lib/circuit/circuit-edit/circuit-edit.component';
@@ -10,6 +10,9 @@ import { CircuitListComponent } from 'libs/share-a-meal/features/src/lib/circuit
 import { UserDetailsComponent } from 'libs/share-a-meal/features/src/lib/user/user-details/user-details.component';
 import { UserEditComponent } from 'libs/share-a-meal/features/src/lib/user/user-edit/user-edit.component';
 import { UserListComponent } from '@avans-nx-workshop/share-a-meal/features';
+import { TeamListComponent } from 'libs/share-a-meal/features/src/lib/team/team-list/team-list.component';
+import { TeamDetailsComponent } from 'libs/share-a-meal/features/src/lib/team/team-details/team-details.component';
+import { TeamEditComponent } from 'libs/share-a-meal/features/src/lib/team/team-edit/team-edit.component';
 
 export const appRoutes: Route[] = [
     {
@@ -66,6 +69,27 @@ export const appRoutes: Route[] = [
         path: 'circuit/:id/edit',
         pathMatch: 'full',
         component: CircuitEditComponent
+    },
+    {
+        path: 'team',
+        pathMatch: 'full',
+        component: TeamListComponent
+    },
+    {
+        path: 'team/new',
+        pathMatch: 'full',
+        component: TeamEditComponent
+    },
+    {
+        path: 'team/:id',
+        pathMatch: 'full',
+        component: TeamDetailsComponent
+    },
+
+    {
+        path: 'team/:id/edit',
+        pathMatch: 'full',
+        component: TeamEditComponent
     },
     {
         path:'**',
