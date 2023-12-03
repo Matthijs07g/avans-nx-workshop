@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICircuit } from '@avans-nx-workshop/shared/api';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { CircuitService } from '../circuit.service';
   templateUrl: './circuit-edit.component.html',
   styleUrls: ['./circuit-edit.component.css'],
 })
-export class CircuitEditComponent {
+export class CircuitEditComponent implements OnInit, OnDestroy{
   circuit: ICircuit | null = null;
   subscription: Subscription | undefined = undefined;
   _id: string | null = null;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ITeam } from '@avans-nx-workshop/shared/api';
 import { TeamService } from '../team.service';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './team-edit.component.html',
   styleUrls: ['./team-edit.component.css'],
 })
-export class TeamEditComponent {
+export class TeamEditComponent implements OnInit, OnDestroy {
   team: ITeam | null = null;
   subscription: Subscription | undefined = undefined;
   _id: string | null = null;

@@ -1,17 +1,12 @@
 import {
     IsNotEmpty,
     IsString,
-    IsBoolean,
-    IsOptional,
-    IsDate,
-    IsArray,
     IsNumber,
 } from 'class-validator';
 import {
     ICreateCircuit,
     IUpdateCircuit,
     IUpsertCircuit,
-    Roles
 } from '@avans-nx-workshop/shared/api';
 
 /**

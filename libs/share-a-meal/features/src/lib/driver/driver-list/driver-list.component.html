@@ -1,0 +1,15 @@
+<div class="container">
+    <br><a class="btn btn-primary add" routerLink="new">Add driver</a><br>
+    <div class="row row-cols-4">
+      <div *ngFor="let driver of drivers" class="col-md-3 d-flex">
+        <div class="card m-3 flex-fill d-flex flex-column" style="width: 18rem;" routerLink="{{ driver._id }}">
+          
+          <img src="{{ driver.picture }}" class="card-img-top" alt="profile">
+          <div class="card-body">
+            <h5 class="card-title">{{ driver.firstName }} {{ driver.lastName }}</h5>
+            <p class="card-text">{{ driver.birthdate }}<br> {{ driver.country }}</p>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>

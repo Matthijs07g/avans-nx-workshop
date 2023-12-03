@@ -1,0 +1,102 @@
+<!-- user-detail.component.html -->
+
+<div class="container">
+    <div *ngIf="driver">
+      <div class="row">
+        <div class="col-md-6">
+          <img [src]="driver.picture" class="img-fluid" alt="profile">
+        </div>
+        <div class="col-md-6">
+          <h2>{{ driver.firstName }}  {{driver.lastName}}</h2>
+          <p>Geboortedatum: {{ driver.birthdate }}</p>
+          <p>Nationaliteit: {{ driver.country }}</p>
+          <p>Races gewonnen: {{ driver.racewins }}Km</p>
+          <p>Kampioenshappen: {{ driver.champion }}</p>
+          <p>Tijd actief: {{ driver.timeActive }}</p>
+  
+          <!-- Edit Form -->
+          <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
+            <div class="form-group">
+              <label for="firstName">Voornaam:</label>
+              <input type="text" id="firstName" name="firstName" [(ngModel)]="driver.firstName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Achternaam:</label>
+                <input type="text" id="lastName" name="lastName" [(ngModel)]="driver.lastName" class="form-control" required>
+              </div>
+            <div class="form-group">
+              <label for="birthdate">Geboortedatum:</label>
+              <input type="date" id="birthdate" name="birthdate" [(ngModel)]="driver.birthdate" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="Country">Nationaliteit:</label>
+                <input type="text" id="Country" name="Country" [(ngModel)]="driver.country" class="form-control" required>
+              </div>
+            <div class="form-group">
+              <label for="racewins">Races gewonnen:</label>
+              <input type="number" id="racewins" name="racewins" [(ngModel)]="driver.racewins" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="champion">Kampioenshappen:</label>
+              <input type="number" id="champion" name="champion" [(ngModel)]="driver.champion" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="timeActive">Tijd actief:</label>
+                <input type="text" id="timeActive" name="timeActive" [(ngModel)]="driver.timeActive" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="picture">Foto Url:</label>
+                <input type="text" id="picture" name="picture" [(ngModel)]="driver.picture" class="form-control" required>
+              </div>
+            <br>
+            <button type="submit" class="btn btn-primary save">Opslaan</button>
+            <button class="btn btn-primary delete" routerLink="/driver/{{driver._id}}">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    
+    <div *ngIf="!driver">
+      <h4>Add Driver</h4>
+      <!-- Add Form -->
+      <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
+        <div class="form-group">
+          <label for="firstName">Voornaam:</label>
+          <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Achternaam:</label>
+            <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" class="form-control" required>
+          </div>
+        <div class="form-group">
+          <label for="birthdate">Geboortedatum:</label>
+          <input type="date" id="birthdate" name="birthdate" [(ngModel)]="birthdate" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="Country">Nationaliteit:</label>
+            <input type="text" id="Country" name="Country" [(ngModel)]="Country" class="form-control" required>
+          </div>
+        <div class="form-group">
+          <label for="racewins">Races gewonnen:</label>
+          <input type="number" id="racewins" name="racewins" [(ngModel)]="racewins" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="champion">Kampioenshappen:</label>
+          <input type="number" id="champion" name="champion" [(ngModel)]="champion" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="timeActive">Tijd actief:</label>
+            <input type="text" id="timeActive" name="timeActive" [(ngModel)]="timeActive" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="picture">Foto Url:</label>
+            <input type="text" id="picture" name="picture" [(ngModel)]="picture" class="form-control" required>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary save">Create</button>
+          <button class="btn btn-primary delete" routerLink="/driver">Cancel</button>
+      </form>
+    </div>
+  </div>
+  

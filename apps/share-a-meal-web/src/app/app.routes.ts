@@ -13,6 +13,9 @@ import { UserListComponent } from '@avans-nx-workshop/share-a-meal/features';
 import { TeamListComponent } from 'libs/share-a-meal/features/src/lib/team/team-list/team-list.component';
 import { TeamDetailsComponent } from 'libs/share-a-meal/features/src/lib/team/team-details/team-details.component';
 import { TeamEditComponent } from 'libs/share-a-meal/features/src/lib/team/team-edit/team-edit.component';
+import { DriverListComponent } from 'libs/share-a-meal/features/src/lib/driver/driver-list/driver-list.component';
+import { DriverEditComponent } from 'libs/share-a-meal/features/src/lib/driver/driver-edit/driver-edit.component';
+import { DriverDetailsComponent } from 'libs/share-a-meal/features/src/lib/driver/driver-details/driver-details.component';
 
 export const appRoutes: Route[] = [
     {
@@ -90,6 +93,27 @@ export const appRoutes: Route[] = [
         path: 'team/:id/edit',
         pathMatch: 'full',
         component: TeamEditComponent
+    },
+    {
+        path: 'driver',
+        pathMatch: 'full',
+        component: DriverListComponent
+    },
+    {
+        path: 'driver/new',
+        pathMatch: 'full',
+        component: DriverEditComponent
+    },
+    {
+        path: 'driver/:id',
+        pathMatch: 'full',
+        component: DriverDetailsComponent
+    },
+
+    {
+        path: 'driver/:id/edit',
+        pathMatch: 'full',
+        component: DriverEditComponent
     },
     {
         path:'**',

@@ -1,0 +1,22 @@
+<div class="container">
+    <div *ngIf="driver">
+      <div class="row">
+        <div class="col-md-6">
+          <img [src]="driver.picture" class="img-fluid" alt="profile">
+        </div>
+        <div class="col-md-6">
+          <h2>{{ driver.firstName }} {{ driver.lastName}}</h2>
+          <p>Geboortedatum: {{ driver.birthdate }}</p>
+          <p>Nationaliteit: {{ driver.country }}</p>
+          <p>Races gewonnen: {{ driver.racewins }}</p>
+          <p>Kampioenshappen: {{ driver.champion }}</p>
+          <p>Tijd actief: {{ driver.timeActive}}</p>
+
+          <button class="btn btn-primary back" routerLink="/driver">Back to Driver List</button>
+          <button class="btn btn-primary edit" routerLink="edit">Edit</button>
+          <button class="btn btn-primary delete" (click)="del()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

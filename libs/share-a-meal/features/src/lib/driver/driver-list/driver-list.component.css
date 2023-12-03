@@ -1,0 +1,18 @@
+.edit{
+    background-color: darkblue;
+}
+.delete{
+    background-color: maroon;
+}
+.usercards{
+    align-self: center;
+}
+
+.row{
+    margin-top: 25px;
+}
+.add{
+    margin-left: 46%;
+    max-width: 120px;
+    background-color: darkred;
+}

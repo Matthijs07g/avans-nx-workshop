@@ -19,6 +19,10 @@ import { TeamListComponent } from './team/team-list/team-list.component';
 import { TeamEditComponent } from './team/team-edit/team-edit.component';
 import { TeamDetailsComponent } from './team/team-details/team-details.component';
 import { TeamService } from './team/team.service';
+import { DriverListComponent } from './driver/driver-list/driver-list.component';
+import { DriverEditComponent } from './driver/driver-edit/driver-edit.component';
+import { DriverDetailsComponent } from './driver/driver-details/driver-details.component';
+import { DriverService } from './driver/driver.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterLink, FormsModule],
@@ -35,8 +39,11 @@ import { TeamService } from './team/team.service';
     TeamListComponent,
     TeamEditComponent,
     TeamDetailsComponent,
+    DriverListComponent,
+    DriverEditComponent,
+    DriverDetailsComponent,
   ],
-  providers: [MealService, UserService, CircuitService, TeamService],
+  providers: [MealService, UserService, CircuitService, TeamService, DriverService],
   exports: [
     MealListComponent,
     MealDetailComponent,
@@ -49,7 +56,10 @@ import { TeamService } from './team/team.service';
     CircuitEditComponent,
     TeamListComponent,
     TeamEditComponent,
-    TeamDetailsComponent
+    TeamDetailsComponent,
+    DriverListComponent,
+    DriverDetailsComponent,
+    DriverEditComponent
   ],
 })
 export class FeaturesModule {}
