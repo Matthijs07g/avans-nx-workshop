@@ -79,6 +79,10 @@ export class UpsertUserDto implements IUpsertUser {
     @IsArray()
     @IsOptional()
     friends!: string[];
+
+    @IsArray()
+    @IsOptional()
+    blogs!: string[];
 }
 
 export class UpdateUserDto implements IUpdateUser {

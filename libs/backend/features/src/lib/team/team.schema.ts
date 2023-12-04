@@ -1,4 +1,4 @@
-import { ITeam, IResourceId } from "@avans-nx-workshop/shared/api";
+import { ITeam } from "@avans-nx-workshop/shared/api";
 import { IsMongoId } from "class-validator";
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 

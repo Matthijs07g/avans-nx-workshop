@@ -6,9 +6,6 @@ export enum Roles {
     Owner = 'Owner'
 }
 
-// Voor nu is onze user een string; later zullen we hier een User object van maken.
-type User = string;
-
 export interface IUser {
     id: Id;
     firstName: string;
@@ -18,7 +15,8 @@ export interface IUser {
     birthdate: string;
     role: Roles;
     pass: string;
-    friends: User[]
+    friends: string[];
+    blogs: string[];
 }
 
 export type ICreateUser = Pick<
