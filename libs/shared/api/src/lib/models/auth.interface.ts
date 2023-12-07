@@ -2,7 +2,7 @@
  * User information required for loggin in
  */
 export interface IUserCredentials {
-    emailadress: string;
+    emailadres: string;
     pass: string;
 }
 

@@ -1,4 +1,4 @@
-import { backendFeaturesModule } from "@avans-nx-workshop/backend/features";
+import { AuthModule, backendFeaturesModule } from "@avans-nx-workshop/backend/features";
 import { environment } from "@fst/shared/util-env";
 import { Logger, Module } from "@nestjs/common";
 import { MongooseModule } from '@nestjs/mongoose';
@@ -27,6 +27,7 @@ import { Neo4jModule, Neo4jScheme } from "nest-neo4j/dist";
             password: environment.NEO4J_PASSWORD,
         }),
             backendFeaturesModule,
+            AuthModule
     ],
     controllers: [],
     providers: []

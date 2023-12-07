@@ -9,6 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import { Public } from './decorators/decorators';
 import {
+    IUser,
     IUserCredentials,
     IUserIdentity,
     IUserRegistration
@@ -32,7 +33,7 @@ export class AuthController {
     @Public()
     @UseGuards(UserExistGuard)
     @Post('register')
-    async register(@Body() user: CreateUserDto): Promise<IUserIdentity> {
+    async register(@Body() user: CreateUserDto): Promise<IUser | null> {
         this.logger.log('Register');
         return await this.authService.register(user);
     }

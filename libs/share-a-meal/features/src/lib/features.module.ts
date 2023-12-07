@@ -23,6 +23,11 @@ import { DriverListComponent } from './driver/driver-list/driver-list.component'
 import { DriverEditComponent } from './driver/driver-edit/driver-edit.component';
 import { DriverDetailsComponent } from './driver/driver-details/driver-details.component';
 import { DriverService } from './driver/driver.service';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { BlogListComponent } from './blog/blog-list/blog-list.component';
+import { BlogDetailsComponent } from './blog/blog-details/blog-details.component';
+import { BlogEditComponent } from './blog/blog-edit/blog-edit.component';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterLink, FormsModule],
@@ -42,8 +47,19 @@ import { DriverService } from './driver/driver.service';
     DriverListComponent,
     DriverEditComponent,
     DriverDetailsComponent,
+    LoginComponent,
+    RegisterComponent,
+    BlogListComponent,
+    BlogDetailsComponent,
+    BlogEditComponent,
   ],
-  providers: [MealService, UserService, CircuitService, TeamService, DriverService],
+  providers: [
+    MealService,
+    UserService,
+    CircuitService,
+    TeamService,
+    DriverService,
+  ],
   exports: [
     MealListComponent,
     MealDetailComponent,
@@ -59,7 +75,7 @@ import { DriverService } from './driver/driver.service';
     TeamDetailsComponent,
     DriverListComponent,
     DriverDetailsComponent,
-    DriverEditComponent
+    DriverEditComponent,
   ],
 })
 export class FeaturesModule {}
