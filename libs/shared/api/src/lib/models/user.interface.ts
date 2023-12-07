@@ -3,11 +3,12 @@ import { Id } from './id.type';
 export enum Roles {
     Guest = 'Guest',
     Admin = 'Admin',
-    Owner = 'Owner'
+    Owner = 'Owner',
+    Unknown = 'Unknown'
 }
 
 export interface IUser {
-    id: Id;
+    _id: Id;
     firstName: string;
     lastName: string;
     picture: string;
@@ -15,14 +16,13 @@ export interface IUser {
     birthdate: string;
     role: Roles;
     pass: string;
-    friends: string[];
-    blogs: string[];
 }
+
 
 export type ICreateUser = Pick<
     IUser,
     'firstName' | 'lastName' | 'picture' | 'emailadres' | 'pass' | 'birthdate'
 >;
-export type IUpdateUser = Partial<Omit<IUser, 'id'>>;
+export type IUpdateUser = Partial<Omit<IUser, '_id'>>;
 export type IUpsertUser = IUser;
 

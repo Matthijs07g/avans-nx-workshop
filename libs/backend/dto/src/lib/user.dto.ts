@@ -46,7 +46,7 @@ export class CreateUserDto implements ICreateUser {
 export class UpsertUserDto implements IUpsertUser {
     @IsString()
     @IsNotEmpty()
-    id!: string;
+    _id!: string;
 
     @IsString()
     @IsNotEmpty()
@@ -66,7 +66,7 @@ export class UpsertUserDto implements IUpsertUser {
 
     @IsString()
     @IsNotEmpty()
-    role!: Roles;
+    role!: Roles.Unknown;
 
     @IsString()
     @IsNotEmpty()
@@ -76,13 +76,6 @@ export class UpsertUserDto implements IUpsertUser {
     @IsNotEmpty()
     birthdate!: string;
 
-    @IsArray()
-    @IsOptional()
-    friends!: string[];
-
-    @IsArray()
-    @IsOptional()
-    blogs!: string[];
 }
 
 export class UpdateUserDto implements IUpdateUser {
@@ -113,4 +106,10 @@ export class UpdateUserDto implements IUpdateUser {
     @IsString()
     @IsNotEmpty()
     role!: Roles;
+}
+
+export class AddFriendDto {
+    @IsString()
+    @IsNotEmpty()
+    friendId!: string;
 }

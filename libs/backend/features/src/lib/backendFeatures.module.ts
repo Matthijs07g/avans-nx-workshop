@@ -11,13 +11,19 @@ import { TeamService } from './team/team.service';
 import { DriverController } from './driver/driver.controller';
 import { DriverSchema, Driver as DriverModel } from './driver/driver.schema';
 import { DriverService } from './driver/driver.service';
+import { UserSchema, User as UserModel } from './user/user.schema';
+import { BlogController } from './blog/blog.controller';
+import { BlogSchema, Blog as BlogModel } from './blog/blog.schema';
+import { BlogService } from './blog/blog.service';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: CircuitModel.name, schema: CircuitSchema },
       { name: TeamModel.name, schema: TeamSchema },
-      { name: DriverModel.name, schema: DriverSchema}
+      { name: DriverModel.name, schema: DriverSchema },
+      { name: UserModel.name, schema: UserSchema },
+      { name: BlogModel.name, schema: BlogSchema }
     ]),
   ],
   controllers: [
@@ -25,8 +31,9 @@ import { DriverService } from './driver/driver.service';
     CircuitController,
     TeamController,
     DriverController,
+    BlogController,
   ],
-  providers: [UserService, CircuitService, TeamService, DriverService],
-  exports: [UserService, CircuitService, TeamService, DriverService],
+  providers: [UserService, CircuitService, TeamService, DriverService, BlogService],
+  exports: [UserService, CircuitService, TeamService, DriverService, BlogService],
 })
 export class backendFeaturesModule {}
