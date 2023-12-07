@@ -6,3 +6,4 @@ export * from './lib/models/id.type';
 export * from './lib/models/team.interface';
 export * from './lib/models/driver.interface';
 export * from './lib/models/blog.interface';
+export * from './lib/models/auth.interface';

@@ -8,6 +8,7 @@ import { UserDocument, User as UserModel } from '../user/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { UpdateUserDto } from '@avans-nx-workshop/backend/dto';
 import { JsonPipe } from '@angular/common';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -114,5 +115,14 @@ export class UserService {
         Logger.log(`${userId} wanted to friend himself`, this.TAG);
         return false;
     }
+
+    async generateHashedPassword(plainTextPassword: string): Promise<string> {
+        const saltOrRounds = 10;
+        return await bcrypt.hash(plainTextPassword, saltOrRounds);
+      }
+    
+      async validatePassword(givenPassword: string, passwordHash: string): Promise<boolean> {
+        return await bcrypt.compare(givenPassword, passwordHash);
+      }
 }
 

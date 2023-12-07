@@ -18,6 +18,16 @@ export interface IUser {
     pass: string;
 }
 
+export interface IUserIdentity {
+    firstName: string;
+    lastName: string;
+    emailadres: string;
+    picture: string;
+    role: Roles;
+    token?: string;
+}
+
+
 
 export type ICreateUser = Pick<
     IUser,
