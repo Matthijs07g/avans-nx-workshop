@@ -16,6 +16,11 @@ import { TeamEditComponent } from 'libs/share-a-meal/features/src/lib/team/team-
 import { DriverListComponent } from 'libs/share-a-meal/features/src/lib/driver/driver-list/driver-list.component';
 import { DriverEditComponent } from 'libs/share-a-meal/features/src/lib/driver/driver-edit/driver-edit.component';
 import { DriverDetailsComponent } from 'libs/share-a-meal/features/src/lib/driver/driver-details/driver-details.component';
+import { LoginComponent } from 'libs/share-a-meal/features/src/lib/auth/login/login.component';
+import { RegisterComponent } from 'libs/share-a-meal/features/src/lib/auth/register/register.component';
+import { BlogListComponent } from 'libs/share-a-meal/features/src/lib/blog/blog-list/blog-list.component';
+import { BlogEditComponent } from 'libs/share-a-meal/features/src/lib/blog/blog-edit/blog-edit.component';
+import { BlogDetailsComponent } from 'libs/share-a-meal/features/src/lib/blog/blog-details/blog-details.component';
 
 export const appRoutes: Route[] = [
     {
@@ -109,11 +114,40 @@ export const appRoutes: Route[] = [
         pathMatch: 'full',
         component: DriverDetailsComponent
     },
-
     {
         path: 'driver/:id/edit',
         pathMatch: 'full',
         component: DriverEditComponent
+    },
+    {
+        path: 'blog',
+        pathMatch: 'full',
+        component: BlogListComponent
+    },
+    {
+        path: 'blog/new',
+        pathMatch: 'full',
+        component: BlogEditComponent
+    },
+    {
+        path: 'blog/:id',
+        pathMatch: 'full',
+        component: BlogDetailsComponent
+    },
+    {
+        path: 'blog/:id/edit',
+        pathMatch: 'full',
+        component: BlogDetailsComponent
+    },
+    {
+        path:'login',
+        pathMatch: 'full',
+        component: LoginComponent
+    },
+    {
+        path:'register',
+        pathMatch: 'full',
+        component: RegisterComponent,
     },
     {
         path:'**',

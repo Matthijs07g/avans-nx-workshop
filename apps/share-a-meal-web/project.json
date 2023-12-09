@@ -16,7 +16,9 @@
         "index": "apps/share-a-meal-web/src/index.html",
         "main": "apps/share-a-meal-web/src/main.ts",
         "polyfills": [
-          "zone.js"
+          "zone.js",
+          "apps/share-a-meal-web/src/process.ts"
+
         ],
         "tsConfig": "apps/share-a-meal-web/tsconfig.app.json",
         "assets": [

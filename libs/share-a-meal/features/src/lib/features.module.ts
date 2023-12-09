@@ -28,6 +28,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
 import { BlogDetailsComponent } from './blog/blog-details/blog-details.component';
 import { BlogEditComponent } from './blog/blog-edit/blog-edit.component';
+import { BlogService } from './blog/blog.service';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterLink, FormsModule],
@@ -59,6 +61,8 @@ import { BlogEditComponent } from './blog/blog-edit/blog-edit.component';
     CircuitService,
     TeamService,
     DriverService,
+    BlogService,
+    AuthService
   ],
   exports: [
     MealListComponent,
@@ -76,6 +80,11 @@ import { BlogEditComponent } from './blog/blog-edit/blog-edit.component';
     DriverListComponent,
     DriverDetailsComponent,
     DriverEditComponent,
+    LoginComponent,
+    RegisterComponent,
+    BlogListComponent,
+    BlogDetailsComponent,
+    BlogEditComponent,
   ],
 })
 export class FeaturesModule {}

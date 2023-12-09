@@ -47,7 +47,7 @@ export class AuthService {
                     const payload = {
                         user_id: user._id
                     };
-                    return {
+                    const signedInUser = {
                         _id: user._id,
                         firstName: user.firstName,
                         lastName: user.lastName,
@@ -55,6 +55,8 @@ export class AuthService {
                         profileImgUrl: user.picture,
                         token: this.jwtService.sign(payload)
                     };
+                    
+                    return signedInUser;
                 } else {
                     const errMsg = 'Email not found or password invalid';
                     this.logger.debug(errMsg);
@@ -68,12 +70,13 @@ export class AuthService {
 
     async register(user: CreateUserDto): Promise<IUser | null> {
         this.logger.log(`Register user ${user.firstName} ${user.lastName}`);
+        
         if (await this.userModel.findOne({ emailadres: user.emailadres })) {
             this.logger.debug('user exists');
             throw new ConflictException('User already exist');
         }
         this.logger.debug('User not found, creating');
-        const createdItem = await this.userService.create(user)
+        const createdItem = await this.userService.create(user);
         return createdItem;
     }
 }

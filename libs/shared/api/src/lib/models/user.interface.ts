@@ -19,10 +19,12 @@ export interface IUser {
 }
 
 export interface IUserIdentity {
+    _id: Id;
     firstName: string;
     lastName: string;
     emailadres: string;
     picture: string;
+    birthdate: string;
     role: Roles;
     token?: string;
 }

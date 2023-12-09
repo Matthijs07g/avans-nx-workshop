@@ -37,6 +37,15 @@ export class BlogService {
         return item;
     }
 
+    async getByOwnerId(id:string):Promise<IBlog[] | null>{
+        Logger.log(`getOneByOwnerId(${id})`, this.TAG);
+        const blog = await this.blogModel.find({owner:id});
+        if(!blog){
+            Logger.debug('Blog not found');
+        }
+        return blog;
+    }
+
     /**
      * Update the arg signature to match the DTO, but keep the
      * return signature - we still want to respond with the complete
@@ -68,18 +77,35 @@ export class BlogService {
         return this.blogModel.findByIdAndDelete({ _id });
     }
 
-    async getRecommendations(_Id: string): Promise<IBlog[] | null>{
-        Logger.log(`Get Recommendations(${_Id})`)
-        const query = `match(user:User{id:$_Id})<-[IS_FRIENDS_WITH]-(friend:User) return friend`
-        const result = this.neo4jService.read(query,{id: _Id});
+    async getRecommendations(_Id: string): Promise<IBlog[] | null> {
+        Logger.log(`Get Recommendations(${_Id})`);
+    
+        const query = `MATCH (user:User{id:$id})-[IS_FRIENDS_WITH]->(friend:User) RETURN friend`;
+        const result = await this.neo4jService.read(query, { id: _Id });
         Logger.log(`Friends: ${JSON.stringify(result)}`);
-        const friendId : any[] = [];
-        (await result).records.forEach(element => {friendId.push(element.get('friend').properties.id)});
-        const recBlogs : any[] = [];
-        friendId.forEach(element =>{
-            recBlogs.push(this.blogModel.findOne({element}));
-        })
-        return recBlogs;
-        
+    
+        const friendId: any[] = [];
+        const recBlogs: IBlog[] = [];
+    
+        (await result).records.forEach((element) => {
+            console.log(element.get('friend').properties.id);
+            friendId.push(element.get('friend').properties.id);
+        });
+    
+        const recBlogsPromises: Promise<IBlog[] | null>[] = friendId.map(async (element) => {
+            const blogs = await this.getByOwnerId(element);
+            return blogs;
+        });
+    
+        const allBlogs = await Promise.all(recBlogsPromises);
+    
+        allBlogs.forEach((blogs) => {
+            if (blogs) {
+                recBlogs.push(...blogs);
+            }
+        });
+    
+        return recBlogs.length > 0 ? recBlogs : null;
     }
+    
 }

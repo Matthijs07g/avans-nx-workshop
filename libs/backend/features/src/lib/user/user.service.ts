@@ -51,25 +51,24 @@ export class UserService {
         const friendId : any[] = [];
         (await result).records.forEach(element => {friendId.push(element.get('friend').properties.id)});
         //look up user based on previous result mongoose
-        const friends : IUser[] = [];
-        friendId.forEach( async element =>{
-            console.log(element)
+
+        const friendsPromises: Promise<IUser | null>[] = friendId.map(async (element) => {
             const item = await this.getOne(element);
-            console.log(item)
-            if(item){
-                friends.push(item)
-            }
-        })
-        console.log('done')
-        return friends;
-        
+            return item;
+        });
+    
+        const friends = await Promise.all(friendsPromises);
+    
+        console.log('done');
+        return friends.filter((friend) => friend !== null) as IUser[];
     }
 
     async create(req: any): Promise<IUser | null> {
         Logger.log('create', this.TAG);
 
 
-        const user = req.body;
+        let user = req.body;
+        if(!user){ user = req }
         let mongoUser;
         //const Team_id = req.Team.Team_id     for authorisatie
 
