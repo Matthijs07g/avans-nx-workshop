@@ -1,1 +1,21 @@
-<p>blog-details works!</p>
+<div class="container">
+    <div *ngIf="blog">
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-7">
+          <h2>{{ blog.title }}</h2>
+          <p>{{ blog.datePosted }}</p>
+          <p>Onderwerp: {{ blog.subject }}</p>
+          <p>{{ blog.content }}</p>
+
+          <button class="btn btn-primary back" routerLink="/blog">Terug</button>
+
+          
+          <button *ngIf="authService.getUserIdFromLocalStorage() === blog.owner" class="btn btn-primary edit" routerLink="edit">Edit</button>
+          <button *ngIf="authService.getUserIdFromLocalStorage() === blog.owner" class="btn btn-primary delete" (click)="del()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

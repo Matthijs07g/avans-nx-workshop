@@ -3,6 +3,7 @@ import { IDriver } from '@avans-nx-workshop/shared/api';
 import { DriverService } from '../driver.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'avans-nx-workshop-driver-details',
@@ -14,7 +15,7 @@ driver: IDriver | null = null;
 subscription: Subscription | undefined = undefined;
 id: string | null = null;
 
-constructor(private route: ActivatedRoute, private router: Router, private driverService: DriverService){}
+constructor(private route: ActivatedRoute, private router: Router, private driverService: DriverService, public authService: AuthService){}
 
 ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');

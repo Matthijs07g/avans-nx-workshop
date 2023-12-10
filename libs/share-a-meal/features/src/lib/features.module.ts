@@ -62,7 +62,7 @@ import { AuthService } from './auth/auth.service';
     TeamService,
     DriverService,
     BlogService,
-    AuthService
+    AuthService,
   ],
   exports: [
     MealListComponent,

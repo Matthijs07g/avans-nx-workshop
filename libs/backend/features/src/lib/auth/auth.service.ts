@@ -53,6 +53,7 @@ export class AuthService {
                         lastName: user.lastName,
                         emailAddress: user.emailadres,
                         profileImgUrl: user.picture,
+                        role: user.role,
                         token: this.jwtService.sign(payload)
                     };
                     

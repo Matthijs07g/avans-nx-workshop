@@ -1,1 +1,13 @@
-<p>blog-list works!</p>
+<div class="container">
+    <br><a class="btn btn-primary add" routerLink="new">Create blog</a><br>
+    <div class="row row-cols-4">
+      <div *ngFor="let blog of blogs" class="col-md-3 d-flex">
+        <div class="card m-3 flex-fill d-flex flex-column" style="width: 18rem;" routerLink="{{ blog._id }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ blog.title }}</h5>
+            <p class="card-text">{{ blog.subject }}<br>{{ blog.datePosted }}</p>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>

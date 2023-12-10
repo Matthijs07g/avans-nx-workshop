@@ -13,8 +13,8 @@
           <p>Tijd actief: {{ driver.timeActive}}</p>
 
           <button class="btn btn-primary back" routerLink="/driver">Back to Driver List</button>
-          <button class="btn btn-primary edit" routerLink="edit">Edit</button>
-          <button class="btn btn-primary delete" (click)="del()">Delete</button>
+          <button *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" class="btn btn-primary edit" routerLink="edit">Edit</button>
+          <button *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" class="btn btn-primary delete" (click)="del()">Delete</button>
         </div>
       </div>
     </div>

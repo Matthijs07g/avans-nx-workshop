@@ -1,5 +1,5 @@
 <div class="container">
-    <br><a class="btn btn-primary add" routerLink="new">Add driver</a><br>
+    <br><a *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" class="btn btn-primary add" routerLink="new">Add driver</a><br>
     <div class="row row-cols-4">
       <div *ngFor="let driver of drivers" class="col-md-3 d-flex">
         <div class="card m-3 flex-fill d-flex flex-column" style="width: 18rem;" routerLink="{{ driver._id }}">

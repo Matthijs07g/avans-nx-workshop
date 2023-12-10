@@ -1,5 +1,5 @@
 <div class="container">
-    <br><a class="btn btn-primary add" routerLink="new">Add circuit</a><br>
+    <br><a *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" class="btn btn-primary add" routerLink="new">Add circuit</a><br>
     <div class="row row-cols-4">
       <div *ngFor="let circuit of circuits" class="col-md-3 d-flex">
         <div class="card m-3 flex-fill d-flex flex-column" style="width: 18rem;" routerLink="{{ circuit._id }}">

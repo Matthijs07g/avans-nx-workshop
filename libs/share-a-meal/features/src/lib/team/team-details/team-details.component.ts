@@ -3,6 +3,7 @@ import { ITeam } from '@avans-nx-workshop/shared/api';
 import { TeamService } from '../team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'avans-nx-workshop-team-details',
@@ -14,7 +15,7 @@ export class TeamDetailsComponent implements OnInit, OnDestroy{
   subscription: Subscription | undefined = undefined;
 id: string | null = null;
 
-constructor(private route: ActivatedRoute, private router: Router, private teamService: TeamService){}
+constructor(private route: ActivatedRoute, private router: Router, private teamService: TeamService, public authService: AuthService){}
 
 ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');

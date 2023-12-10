@@ -40,8 +40,32 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="driver">Driver</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="blog">Blogs</a>
+        </li>
       </ul>
       <!-- Left links -->
+
+      <ul *ngIf="(loggedInUser$ | async) === null" class="navbar-nav me-auto mb-1 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="register">Registreren</a>
+        </li>
+      </ul>
+
+      <ul *ngIf="loggedInUser$ | async as IUserIdentity" class="navbar-nav me-auto mb-1 mb-lg-0">
+        <!-- <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="dashboard">{{ loggedInUser$._id }}</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" (click)="logOut()">Uitloggen</a>
+        </li>
+
+      </ul>
+
+
 
         <ul class="navbar-nav me-auto mb-1 mb-lg-0">
           <li class="nav-item">

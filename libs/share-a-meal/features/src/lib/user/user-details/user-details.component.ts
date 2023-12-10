@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IUser, Roles } from '@avans-nx-workshop/shared/api';
 import { UserService } from '../user.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'avans-nx-workshop-user-details',
@@ -14,7 +15,7 @@ export class UserDetailsComponent implements OnInit {
     subscription: Subscription | undefined = undefined;
   id: string | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService){}
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, public authService: AuthService){}
 
   ngOnInit(): void {
       this.id = this.route.snapshot.paramMap.get('id');

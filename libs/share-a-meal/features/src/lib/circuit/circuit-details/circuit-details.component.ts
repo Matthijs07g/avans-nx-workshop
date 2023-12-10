@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ICircuit } from '@avans-nx-workshop/shared/api';
 import { Subscription } from 'rxjs';
 import { CircuitService } from '../circuit.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'avans-nx-workshop-circuit-details',
@@ -14,7 +15,7 @@ export class CircuitDetailsComponent implements OnInit, OnDestroy{
   subscription: Subscription | undefined = undefined;
 id: string | null = null;
 
-constructor(private route: ActivatedRoute, private router: Router, private circuitService: CircuitService){}
+constructor(private route: ActivatedRoute, private router: Router, private circuitService: CircuitService, public authService: AuthService){}
 
 ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');

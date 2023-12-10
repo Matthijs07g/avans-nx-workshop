@@ -61,13 +61,15 @@ export class AuthService{
                     this.saveUserToLocalStorage(user);
                     this.currentUser$.next(user);
                     console.log('Logged in');
+                    console.log(this.currentUser$)
                     return user;
                 }),
                 catchError(this.handleError)
             );
     }
-
+    
     getUserFromLocalStorage(): Observable<IUserIdentity>{
+
         const storedUser = localStorage.getItem(this.CURRENT_USER);
         let localUser;
         if(storedUser){
@@ -75,11 +77,47 @@ export class AuthService{
         } else{
             Logger.debug('No user in localstorage');
         }
+        console.log(localUser.results._id);
         return of(localUser);
+    }
+
+    getUserIdFromLocalStorage(): string{
+        const storedUser = localStorage.getItem(this.CURRENT_USER);
+        let localUser;
+        if(storedUser){
+            localUser = JSON.parse(storedUser);
+        } else{
+            Logger.debug('No user in localstorage');
+        }
+        const userId = localUser.results._id;
+        return userId;
+    }
+
+    getUserRoleFromLocalStorage(): string{
+        const storedUser = localStorage.getItem(this.CURRENT_USER);
+        let localUser;
+        if(storedUser){
+            localUser = JSON.parse(storedUser);
+        } else{
+            Logger.debug('No user in localstorage');
+        }
+        const userId = localUser.results.role;
+        return userId;
     }
 
     private saveUserToLocalStorage(user: IUserIdentity): void{
         localStorage.setItem(this.CURRENT_USER, JSON.stringify(user));
+    }
+
+    public removeFromLocalStorage() : void{
+        localStorage.removeItem(this.CURRENT_USER)
+    }
+
+    public userMayEdit(itemUserId: string) : Observable<boolean>{
+        return this.currentUser$.pipe(
+            map((user:IUserIdentity|undefined) =>(user ? user._id === itemUserId : false))
+        )
+
     }
 
     public handleError(error: HttpErrorResponse): Observable<any> {

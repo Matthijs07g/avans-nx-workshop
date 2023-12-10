@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IDriver } from '@avans-nx-workshop/shared/api';
 import { DriverService } from '../driver.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'avans-nx-workshop-driver-list',
@@ -12,7 +13,7 @@ export class DriverListComponent implements OnInit, OnDestroy{
   drivers: IDriver[] | null = null;
   subscription: Subscription | undefined = undefined;
 
-  constructor(private driverService: DriverService) {}
+  constructor(private driverService: DriverService, public authService: AuthService) {}
 
   ngOnInit(): void {
       this.subscription = this.driverService.list().subscribe((results) => {
