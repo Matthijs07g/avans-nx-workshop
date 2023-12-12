@@ -11,15 +11,15 @@
           <!-- Edit Form -->
           <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
             <div class="form-group">
-              <label for="firstName">Voornaam:</label>
+              <label for="firstName">Titel:</label>
               <input type="text" id="firstName" name="firstName" [(ngModel)]="blog.title" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="lastName">Achternaam:</label>
+                <label for="lastName">Onderwerp:</label>
                 <input type="text" id="lastName" name="lastName" [(ngModel)]="blog.subject" class="form-control" required>
               </div>
             <div class="form-group">
-              <label for="birthdate">Geboortedatum:</label>
+              <label for="birthdate">inhoud:</label>
               <input type="text" id="birthdate" name="birthdate" [(ngModel)]="blog.content" class="form-control" required>
             </div>
             <br>
@@ -36,15 +36,15 @@
       <!-- Add Form -->
       <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
         <div class="form-group">
-          <label for="firstName">Voornaam:</label>
+          <label for="firstName">Title:</label>
           <input type="text" id="firstName" name="firstName" [(ngModel)]="title" class="form-control" required>
         </div>
         <div class="form-group">
-            <label for="lastName">Achternaam:</label>
+            <label for="lastName">Onderwerp:</label>
             <input type="text" id="lastName" name="lastName" [(ngModel)]="subject" class="form-control" required>
           </div>
         <div class="form-group">
-          <label for="birthdate">Geboortedatum:</label>
+          <label for="birthdate">inhoud:</label>
           <input type="text" id="birthdate" name="birthdate" [(ngModel)]="content" class="form-control" required>
         </div>
         <br>
