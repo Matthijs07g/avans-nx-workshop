@@ -2,9 +2,11 @@ import {
     IsNotEmpty,
     IsString,
     IsNumber,
+    IsObject
 } from 'class-validator';
 import {
     ICreateDriver,
+    ITeam,
     IUpdateDriver,
     IUpsertDriver,
 } from '@avans-nx-workshop/shared/api';
@@ -29,6 +31,10 @@ export class CreateDriverDto implements ICreateDriver {
     @IsString()
     @IsNotEmpty()
     birthdate!: string;
+
+    @IsObject()
+    @IsNotEmpty()
+    team!: ITeam
 
     @IsNumber()
     @IsNotEmpty()
@@ -68,6 +74,10 @@ export class UpsertDriverDto implements IUpsertDriver {
     @IsNotEmpty()
     birthdate!: string;
 
+    @IsObject()
+    @IsNotEmpty()
+    team!: ITeam
+
     @IsNumber()
     @IsNotEmpty()
     racewins!: number;
@@ -101,6 +111,10 @@ export class UpdateDriverDto implements IUpdateDriver {
     @IsString()
     @IsNotEmpty()
     birthdate!: string;
+
+    @IsObject()
+    @IsNotEmpty()
+    team!: ITeam
 
     @IsNumber()
     @IsNotEmpty()

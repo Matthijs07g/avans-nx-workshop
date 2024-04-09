@@ -1,3 +1,4 @@
+import { ITeam } from './team.interface';
 import { Id } from './id.type';
 
 // Voor nu is onze user een string; later zullen we hier een User object van maken.
@@ -9,6 +10,7 @@ export interface IDriver {
     lastName: string;
     country: string;
     birthdate: string;
+    team: ITeam;
     racewins: number;
     champion: number;
     timeActive: string;
@@ -17,7 +19,7 @@ export interface IDriver {
 
 export type ICreateDriver = Pick<
     IDriver,
-    'firstName' | 'lastName' | 'country' | 'birthdate' | 'racewins' | 'champion' | 'timeActive' | 'picture'
+    'firstName' | 'lastName' | 'country' | 'birthdate' | 'team' | 'racewins' | 'champion' | 'timeActive' | 'picture'
 >;
 export type IUpdateDriver = Partial<Omit<IDriver, '_id'>>;
 export type IUpsertDriver = IDriver;

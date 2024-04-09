@@ -30,7 +30,7 @@ export class DriverService {
         Logger.log(`getOne(${_id})`, this.TAG);
         const item = await this.driverModel.findOne({ _id }).exec();
         if(!item){
-            Logger.debug('Team not found');
+            Logger.debug('driver not found');
         }
         return item;
     }
@@ -43,10 +43,11 @@ export class DriverService {
     async create(req: any): Promise<IDriver | null> {
         Logger.log('create', this.TAG);
         const driver = req.body;
+        console.log(req.body)
         //const Team_id = req.Team.Team_id     for authorisatie
 
         if(driver){
-            Logger.log(`Create Team ${driver.firstName}`);
+            Logger.log(`Create Driver ${driver.firstName}`);
             const createdItem = {
                 ...driver
             };

@@ -1,9 +1,10 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, IDriver } from '@avans-nx-workshop/shared/api';
+import { map, catchError, tap, throwIfEmpty } from 'rxjs/operators';
+import { ApiResponse, IDriver, ITeam } from '@avans-nx-workshop/shared/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@fst/shared/util-env';
+import { TeamService } from '../team/team.service';
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
@@ -22,7 +23,7 @@ export class DriverService{
      endpoint = environment.apiUrl;
 
 
-    constructor(private readonly http: HttpClient) {}
+    constructor(private readonly http: HttpClient, private teamService: TeamService) {}
 
     /**
      * Get all items.
@@ -49,7 +50,7 @@ export class DriverService{
      *
      */
     public read(id: string | null, options?: any): Observable<IDriver> {
-        console.log(`read ${this.endpoint}driver/${id}`);
+        console.log(`read ${this.endpoint}driver/${id} frontend`);
         return this.http
             .get<ApiResponse<IDriver>>(this.endpoint+'driver/'+id, {
                 ...options,
@@ -63,11 +64,12 @@ export class DriverService{
     }
 
     //Post Item
-    public create(firstName: string, lastName: string, country: string, birthdate: string, racewins: number, champion: number, timeActive: string, picture: string): Observable<IDriver>{
-        console.log(`post ${this.endpoint}driver`);
+    public create(firstName: string, lastName: string, country: string, birthdate: string, team: ITeam, racewins: number, champion: number, timeActive: string, picture: string): Observable<IDriver>{
+        console.log(`post ${this.endpoint}driver frontend`);
+
         return this.http
             .post<ApiResponse<IDriver>>(this.endpoint+'driver', {
-                firstName, lastName, country, birthdate, racewins, champion, timeActive, picture
+                firstName, lastName, country, birthdate, team, racewins, champion, timeActive, picture
             })
             .pipe(
                 tap(console.log),
@@ -77,11 +79,12 @@ export class DriverService{
     }
 
     //Put Item
-    public update(_id:string | null, firstName: string | undefined, lastName: string | undefined, country: string | undefined, birthdate: string | undefined, racewins: number | undefined, champion: number | undefined, timeActive: string | undefined, picture: string | undefined): Observable<IDriver>{
+    public update(_id:string | null, firstName: string | undefined, lastName: string | undefined, country: string | undefined, birthdate: string | undefined, team: ITeam | undefined, racewins: number | undefined, champion: number | undefined, timeActive: string | undefined, picture: string | undefined): Observable<IDriver>{
         console.log(`put ${this.endpoint}driver/${_id}  frontend`);
+
         return this.http
             .put<ApiResponse<IDriver>>(this.endpoint+'driver/'+_id, {
-                firstName, lastName, country, birthdate, racewins, champion, timeActive,  picture
+                firstName, lastName, country, birthdate, team, racewins, champion, timeActive,  picture
             })
             .pipe(
                 tap(console.log),

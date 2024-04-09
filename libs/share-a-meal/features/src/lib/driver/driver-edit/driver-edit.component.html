@@ -10,6 +10,7 @@
           <h2>{{ driver.firstName }}  {{driver.lastName}}</h2>
           <p>Geboortedatum: {{ driver.birthdate }}</p>
           <p>Nationaliteit: {{ driver.country }}</p>
+          <p>Team: {{ driver.team.name }}</p>
           <p>Races gewonnen: {{ driver.racewins }}Km</p>
           <p>Kampioenshappen: {{ driver.champion }}</p>
           <p>Tijd actief: {{ driver.timeActive }}</p>
@@ -31,6 +32,13 @@
             <div class="form-group">
                 <label for="Country">Nationaliteit:</label>
                 <input type="text" id="Country" name="Country" [(ngModel)]="driver.country" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="team">Team:</label>
+                <select type="" id="team" name="team" [(ngModel)]="driver.team.name" class="form-control" required>
+                <option> </option>
+                <option *ngFor="let team of teams">{{ team.name }}</option>
+                </select>
               </div>
             <div class="form-group">
               <label for="racewins">Races gewonnen:</label>
@@ -76,6 +84,15 @@
         <div class="form-group">
             <label for="Country">Nationaliteit:</label>
             <input type="text" id="Country" name="Country" [(ngModel)]="Country" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="team">Team:</label>
+            <select id="team" name="team" [(ngModel)]="teamName" class="form-control" required>
+              <option> </option>
+              <ng-container *ngFor="let team of teams">
+              <option>{{ team.name }}</option>
+              </ng-container>
+              </select>
           </div>
         <div class="form-group">
           <label for="racewins">Races gewonnen:</label>

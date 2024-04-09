@@ -1,4 +1,4 @@
-import { IDriver } from "@avans-nx-workshop/shared/api";
+import { IDriver, ITeam } from "@avans-nx-workshop/shared/api";
 import { IsMongoId } from "class-validator";
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
@@ -20,6 +20,9 @@ export class Driver implements IDriver {
 
     @Prop({ required: true})
     birthdate!: string;
+
+    @Prop({ required: true, type: Object})
+    team!: ITeam;
 
     @Prop({ required: true})
     racewins!: number;
