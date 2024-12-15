@@ -32,11 +32,11 @@ jobs:
           cd ${GITHUB_WORKSPACE}/dist/apps/data-api/ && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
           cd ${GITHUB_WORKSPACE}/dist/apps/share-a-meal-web/ && zip ${GITHUB_WORKSPACE}/share-a-meal-web-release.zip ./* -r
 
-      - name: Upload my-app artifact for deployment job
+      - name: Upload share-a-meal-web artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: my-app
-          path: my-app-release.zip
+          name: share-a-meal-web
+          path: share-a-meal-web-release.zip
 
       - name: Upload data-api artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -44,7 +44,7 @@ jobs:
           name: data-api
           path: data-api-release.zip
 
-  deploy-my-app:
+  deploy-share-a-meal-web:
     runs-on: ubuntu-latest
     name: Deploy Angular Frontend
     needs: build
@@ -55,10 +55,10 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: my-app
+          name: share-a-meal-web
 
       - name: Unzip artifact for deployment
-        run: unzip my-app-release.zip
+        run: unzip share-a-meal-web-release.zip
 
       - name: Deploy to static azure web app
         id: builddeploy
