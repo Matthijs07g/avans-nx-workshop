@@ -1,63 +1,65 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy a Node.js app and an Angular app to an Azure
+name: Build and deploy frontend and backend app to Azure
 
 on:
   push:
     branches:
-      - master
+      - release
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    name: Build and zip apps from /dist
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '18.x'
 
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present --prod
+          npm run build --if-present
+          # npm run test --if-present
 
       - name: Zip artifacts for deployment
         run: |
           echo ${GITHUB_WORKSPACE}
           cd ${GITHUB_WORKSPACE}/dist/apps/data-api/ && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
-          cd ${GITHUB_WORKSPACE}/dist/apps/share-a-meal-web/ && zip ${GITHUB_WORKSPACE}/share-a-meal-web-release.zip ./* -r
+          cd ${GITHUB_WORKSPACE}/dist/apps/my-app/ && zip ${GITHUB_WORKSPACE}/my-app-release.zip ./* -r
 
-      - name: Upload frontend-app artifact for deployment job
-        uses: actions/upload-artifact@v3
+      - name: Upload my-app artifact for deployment job
+        uses: actions/upload-artifact@v4
         with:
-          name: share-a-meal-web
-          path: share-a-meal-web-release.zip
+          name: my-app
+          path: my-app-release.zip
 
       - name: Upload data-api artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: data-api
           path: data-api-release.zip
 
-  deploy-frontend-app:
+  deploy-my-app:
     runs-on: ubuntu-latest
+    name: Deploy Angular Frontend
     needs: build
     environment:
       name: 'Production'
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: share-a-meal-web
+          name: my-app
 
       - name: Unzip artifact for deployment
-        run: unzip share-a-meal-web-release.zip
+        run: unzip my-app-release.zip
 
       - name: Deploy to static azure web app
         id: builddeploy
@@ -68,10 +70,12 @@ jobs:
           action: 'upload'
           app_location: '/' # App source code path
           api_location: '' # Api source code path - optional
-          output_location: '' # Built app content directory - optional
+          output_location: 'dist/apps/share-a-meal-web' # Built app content directory - optional
+          github_id_token: ${{ steps.idtoken.outputs.result }}
 
-  deploy-backend-api:
+  deploy-data-api:
     runs-on: ubuntu-latest
+    name: Deploy NestJs data-api backend
     needs: build
     environment:
       name: 'Production'
@@ -79,7 +83,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: data-api
 
@@ -91,9 +95,9 @@ jobs:
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
-          app-name: 'avans-nx-matthijs'
+          app-name: 'share-a-meal-web'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.NEXTJS_PUBLISHPROFILE }}
+          publish-profile: ${{ secrets.NESTJS_PUBLISHPROFILE }}
           package: .

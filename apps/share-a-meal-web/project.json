@@ -29,7 +29,8 @@
           "node_modules/bootstrap/dist/css/bootstrap.min.css",
           "apps/share-a-meal-web/src/styles.css"
         ],
-        "scripts": []
+        "scripts": [],
+        "generatePackageJson": true
       },
       "configurations": {
         "production": {

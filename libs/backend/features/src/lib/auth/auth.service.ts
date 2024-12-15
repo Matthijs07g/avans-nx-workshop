@@ -35,6 +35,12 @@ export class AuthService {
     }
 
     async login(credentials: IUserCredentials): Promise<IUserIdentity> {
+        if (!credentials || !credentials.emailadres || !credentials.pass) {
+            const errMsg = 'Credentials not provided';
+            this.logger.debug(errMsg);
+            throw new UnauthorizedException(errMsg);
+        }
+
         this.logger.log('login ' + credentials.emailadres);
         return await this.userModel
             .findOne({
