@@ -30,7 +30,7 @@ jobs:
         run: |
           echo ${GITHUB_WORKSPACE}
           cd ${GITHUB_WORKSPACE}/dist/apps/data-api/ && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
-          cd ${GITHUB_WORKSPACE}/dist/apps/my-app/ && zip ${GITHUB_WORKSPACE}/my-app-release.zip ./* -r
+          cd ${GITHUB_WORKSPACE}/dist/apps/share-a-meal-web/ && zip ${GITHUB_WORKSPACE}/share-a-meal-web-release.zip ./* -r
 
       - name: Upload my-app artifact for deployment job
         uses: actions/upload-artifact@v4
