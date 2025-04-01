@@ -59,7 +59,8 @@ export class BlogService {
         if(blog){
             Logger.log(`Create Blog ${blog.title}`);
             const createdItem = {
-                ...blog
+                ...blog,
+                datePosted: new Date().toLocaleDateString('nl-NL'),
             };
             return this.blogModel.create(createdItem);
         }

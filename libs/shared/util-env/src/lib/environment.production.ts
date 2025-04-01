@@ -3,7 +3,7 @@ import { IEnvironment } from "./environment.interface";
 export const environment: IEnvironment = {
     production: true,
     apiUrl: 'https://avans-nx-matthijs.azurewebsites.net/api/',
-    MONGO_DB_CONNECTION_STRING: 'mongodb+srv://Guest:82cvM6Ykf7Augf2@f1blogger.pilbua3.mongodb.net/?retryWrites=true&w=majority',
+    MONGO_DB_CONNECTION_STRING: 'mongodb+srv://Guest:82cvM6Ykf7Augf2@f1blogger.itow09w.mongodb.net/?retryWrites=true&w=majority&appName=F1Blogger',
     NEO4J_SCHEME: 'neo4j+s',
     NEO4J_HOST: 'f23c0173.databases.neo4j.io',
     NEO4J_PORT: '7687',
