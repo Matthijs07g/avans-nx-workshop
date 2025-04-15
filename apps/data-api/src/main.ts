@@ -23,7 +23,7 @@ async function bootstrap() {
   // General exception handling
   // app.useGlobalFilters(new HttpExceptionFilter());
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 8080;
   await app.listen(port);
   Logger.log(
       `🚀 DATA-API server is running on: http://localhost:${port}/${globalPrefix}`

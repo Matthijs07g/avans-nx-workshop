@@ -2,7 +2,6 @@ import { AuthModule, backendFeaturesModule } from "@avans-nx-workshop/backend/fe
 import { environment } from "@fst/shared/util-env";
 import { Logger, Module } from "@nestjs/common";
 import { MongooseModule } from '@nestjs/mongoose';
-import { Neo4jModule, Neo4jScheme } from "nest-neo4j/dist";
 
 @Module({
     imports: [
@@ -19,15 +18,8 @@ import { Neo4jModule, Neo4jScheme } from "nest-neo4j/dist";
                 return connection;
             }
         }),
-        Neo4jModule.forRoot({
-            scheme : environment.NEO4J_SCHEME as Neo4jScheme,
-            host: environment.NEO4J_HOST,
-            port: environment.NEO4J_PORT,
-            username: environment.NEO4J_USERNAME,
-            password: environment.NEO4J_PASSWORD,
-        }),
-            backendFeaturesModule,
-            AuthModule
+        backendFeaturesModule,
+        AuthModule
     ],
     controllers: [],
     providers: []
