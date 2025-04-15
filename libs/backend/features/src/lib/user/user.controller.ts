@@ -17,20 +17,20 @@ export class UserController {
     return this.userService.getOne(id);
   }
 
-  @Get(':id/friends')
-  getFriends(@Param('id') id: string):Promise<IUser[] | null>{
-    return this.userService.getFriends(id)
-  }
+  // @Get(':id/friends')
+  // getFriends(@Param('id') id: string):Promise<IUser[] | null>{
+  //   return this.userService.getFriends(id)
+  // }
 
   @Post('')
   create(@Request() req: any): Promise<IUser | null>{
     return this.userService.create(req);
   }
 
-  @Post(':id')
-  addFriends(@Param('id') id:string, @Request() req: any){
-    return this.userService.addFriend(id, req);
-  }
+  // @Post(':id')
+  // addFriends(@Param('id') id:string, @Request() req: any){
+  //   return this.userService.addFriend(id, req);
+  // }
 
   @Put(':id')
   update(@Param('id') id:string, @Body() data: UpdateUserDto): Promise<IUser | null>{
