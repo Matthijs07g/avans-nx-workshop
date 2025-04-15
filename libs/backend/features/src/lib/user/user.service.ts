@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { IBlog, IUser, Roles } from '@avans-nx-workshop/shared/api';
 import { BehaviorSubject, delay } from 'rxjs';
 import { Logger } from '@nestjs/common';
-import { Neo4jService } from "nest-neo4j/dist";
+//import { Neo4jService } from "nest-neo4j/dist";
 import { Model, mongo } from 'mongoose';
 import { UserDocument, User as UserModel } from '../user/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
@@ -15,7 +15,7 @@ export class UserService {
     TAG = 'Userservice';
 
     constructor(
-        private readonly neo4jService: Neo4jService, 
+        //private readonly neo4jService: Neo4jService, 
         @InjectModel(UserModel.name) private userModel: Model<UserDocument>
         ){}
 
@@ -43,25 +43,25 @@ export class UserService {
         return item;
     }
 
-    async getFriends(_Id: string): Promise<IUser[]>{
-        Logger.log(`getFriends(${_Id})`, this.TAG)
-        //look up Id op friends neo4j
-        const query = `match(user:User{id:$id})-[IS_FRIENDS_WITH]->(friend:User) return friend`
-        const result = this.neo4jService.read(query,{id: _Id});
-        const friendId : any[] = [];
-        (await result).records.forEach(element => {friendId.push(element.get('friend').properties.id)});
-        //look up user based on previous result mongoose
+    // async getFriends(_Id: string): Promise<IUser[]>{
+    //     Logger.log(`getFriends(${_Id})`, this.TAG)
+    //     //look up Id op friends neo4j
+    //     const query = `match(user:User{id:$id})-[IS_FRIENDS_WITH]->(friend:User) return friend`
+    //     const result = this.neo4jService.read(query,{id: _Id});
+    //     const friendId : any[] = [];
+    //     (await result).records.forEach(element => {friendId.push(element.get('friend').properties.id)});
+    //     //look up user based on previous result mongoose
 
-        const friendsPromises: Promise<IUser | null>[] = friendId.map(async (element) => {
-            const item = await this.getOne(element);
-            return item;
-        });
+    //     const friendsPromises: Promise<IUser | null>[] = friendId.map(async (element) => {
+    //         const item = await this.getOne(element);
+    //         return item;
+    //     });
     
-        const friends = await Promise.all(friendsPromises);
+    //     const friends = await Promise.all(friendsPromises);
     
-        console.log('done');
-        return friends.filter((friend) => friend !== null) as IUser[];
-    }
+    //     console.log('done');
+    //     return friends.filter((friend) => friend !== null) as IUser[];
+    // }
 
     async create(req: any): Promise<IUser | null> {
         Logger.log('create', this.TAG);
@@ -78,12 +78,12 @@ export class UserService {
                 ...user
             };
             mongoUser = this.userModel.create(createdItem);
-            if(await mongoUser){
+            // if(await mongoUser){
                 
-                const query = `CREATE (user:User{id:$_Id})`;
-                const result = await this.neo4jService.write(query,{_Id : `${(await mongoUser)._id}`});
-                Logger.log(`result:${JSON.stringify(result)}`);
-            }
+            //     const query = `CREATE (user:User{id:$_Id})`;
+            //     const result = await this.neo4jService.write(query,{_Id : `${(await mongoUser)._id}`});
+            //     Logger.log(`result:${JSON.stringify(result)}`);
+            // }
 
             return mongoUser;
         }
@@ -100,20 +100,20 @@ export class UserService {
         return this.userModel.findByIdAndDelete({_id});
     }
 
-    async addFriend(userId: string, req: any){
-        const request = req.body;
-        const newFriendId = request.otherId
-        if(userId != newFriendId){
-            Logger.log(`${userId} added ${newFriendId} as friend`, this.TAG);
-            const query = `MATCH (user:User {id: $userId})
-                           MATCH (newFriend:User {id: $newFriendId})
-                           CREATE (user)-[rel:IS_FRIENDS_WITH]->(newFriend)`;
-            const result = await this.neo4jService.write(query,{userId:userId, newFriendId:newFriendId});
-            return true;
-        }
-        Logger.log(`${userId} wanted to friend himself`, this.TAG);
-        return false;
-    }
+    // async addFriend(userId: string, req: any){
+    //     const request = req.body;
+    //     const newFriendId = request.otherId
+    //     if(userId != newFriendId){
+    //         Logger.log(`${userId} added ${newFriendId} as friend`, this.TAG);
+    //         const query = `MATCH (user:User {id: $userId})
+    //                        MATCH (newFriend:User {id: $newFriendId})
+    //                        CREATE (user)-[rel:IS_FRIENDS_WITH]->(newFriend)`;
+    //         const result = await this.neo4jService.write(query,{userId:userId, newFriendId:newFriendId});
+    //         return true;
+    //     }
+    //     Logger.log(`${userId} wanted to friend himself`, this.TAG);
+    //     return false;
+    // }
 
     async generateHashedPassword(plainTextPassword: string): Promise<string> {
         const saltOrRounds = 10;
