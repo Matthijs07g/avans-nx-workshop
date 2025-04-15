@@ -66,25 +66,15 @@ export class UserService {
     async create(req: any): Promise<IUser | null> {
         Logger.log('create', this.TAG);
 
-
         let user = req.body;
         if(!user){ user = req }
-        let mongoUser;
-        //const Team_id = req.Team.Team_id     for authorisatie
 
         if(user){
             Logger.log(`Create User ${user.firstName} ${user.lastName}`);
             const createdItem = {
                 ...user
             };
-            mongoUser = this.userModel.create(createdItem);
-            // if(await mongoUser){
-                
-            //     const query = `CREATE (user:User{id:$_Id})`;
-            //     const result = await this.neo4jService.write(query,{_Id : `${(await mongoUser)._id}`});
-            //     Logger.log(`result:${JSON.stringify(result)}`);
-            // }
-
+            const mongoUser = await this.userModel.create(createdItem);
             return mongoUser;
         }
         return null;
