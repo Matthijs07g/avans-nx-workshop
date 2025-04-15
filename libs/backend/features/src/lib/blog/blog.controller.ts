@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Request } from '@nestj
 import { BlogService } from './blog.service';
 import { IBlog } from '@avans-nx-workshop/shared/api';
 import { UpdateBlogDto } from '@avans-nx-workshop/backend/dto';
+import { CreateBlogDto } from '@avans-nx-workshop/backend/dto';
 
 @Controller('blog')
 export class BlogController {
@@ -18,14 +19,14 @@ export class BlogController {
     return this.blogService.getOne(id);
   }
 
-  @Get(':id/recommendations')
-  getRecommendations(@Param('id') id: string) : Promise<IBlog[] | null>{
-    return this.blogService.getRecommendations(id);
-  }
+  // @Get(':id/recommendations')
+  // getRecommendations(@Param('id') id: string) : Promise<IBlog[] | null>{
+  //   return this.blogService.getRecommendations(id);
+  // }
   
 
   @Post('')
-  create(@Request() req : any): Promise<IBlog | null> {
+  create(@Request() req : CreateBlogDto): Promise<IBlog | null> {
     return this.blogService.create(req);
   }
 

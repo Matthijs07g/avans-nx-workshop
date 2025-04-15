@@ -7,14 +7,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BlogDocument, Blog as BlogModel } from './blog.schema';
 import { UpdateBlogDto } from '@avans-nx-workshop/backend/dto';
-import { Neo4jService } from 'nest-neo4j/dist';
 
 @Injectable()
 export class BlogService {
     TAG = 'BlogService';
 
     constructor(
-        private readonly neo4jService: Neo4jService, 
         @InjectModel(BlogModel.name) private blogModel: Model<BlogDocument>
     ) {}
 
@@ -78,35 +76,35 @@ export class BlogService {
         return this.blogModel.findByIdAndDelete({ _id });
     }
 
-    async getRecommendations(_Id: string): Promise<IBlog[] | null> {
-        Logger.log(`Get Recommendations(${_Id})`);
+    // async getRecommendations(_Id: string): Promise<IBlog[] | null> {
+    //     Logger.log(`Get Recommendations(${_Id})`);
     
-        const query = `MATCH (user:User{id:$id})-[IS_FRIENDS_WITH]->(friend:User) RETURN friend`;
-        const result = await this.neo4jService.read(query, { id: _Id });
-        Logger.log(`Friends: ${JSON.stringify(result)}`);
+    //     const query = `MATCH (user:User{id:$id})-[IS_FRIENDS_WITH]->(friend:User) RETURN friend`;
+    //     const result = await this.neo4jService.read(query, { id: _Id });
+    //     Logger.log(`Friends: ${JSON.stringify(result)}`);
     
-        const friendId: any[] = [];
-        const recBlogs: IBlog[] = [];
+    //     const friendId: any[] = [];
+    //     const recBlogs: IBlog[] = [];
     
-        (await result).records.forEach((element) => {
-            console.log(element.get('friend').properties.id);
-            friendId.push(element.get('friend').properties.id);
-        });
+    //     (await result).records.forEach((element) => {
+    //         console.log(element.get('friend').properties.id);
+    //         friendId.push(element.get('friend').properties.id);
+    //     });
     
-        const recBlogsPromises: Promise<IBlog[] | null>[] = friendId.map(async (element) => {
-            const blogs = await this.getByOwnerId(element);
-            return blogs;
-        });
+    //     const recBlogsPromises: Promise<IBlog[] | null>[] = friendId.map(async (element) => {
+    //         const blogs = await this.getByOwnerId(element);
+    //         return blogs;
+    //     });
     
-        const allBlogs = await Promise.all(recBlogsPromises);
+    //     const allBlogs = await Promise.all(recBlogsPromises);
     
-        allBlogs.forEach((blogs) => {
-            if (blogs) {
-                recBlogs.push(...blogs);
-            }
-        });
+    //     allBlogs.forEach((blogs) => {
+    //         if (blogs) {
+    //             recBlogs.push(...blogs);
+    //         }
+    //     });
     
-        return recBlogs.length > 0 ? recBlogs : null;
-    }
+    //     return recBlogs.length > 0 ? recBlogs : null;
+    // }
     
 }
