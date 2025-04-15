@@ -40,39 +40,37 @@ export class AuthService {
             this.logger.debug(errMsg);
             throw new UnauthorizedException(errMsg);
         }
-
+    
         this.logger.log('login ' + credentials.emailadres);
-        return await this.userModel
+        const user = await this.userModel
             .findOne({
                 emailadres: credentials.emailadres
             })
             .select('+pass')
-            .exec()
-            .then((user) => {
-                if (user && user.pass === credentials.pass) {
-                    const payload = {
-                        user_id: user._id
-                    };
-                    const signedInUser = {
-                        _id: user._id,
-                        firstName: user.firstName,
-                        lastName: user.lastName,
-                        emailAddress: user.emailadres,
-                        profileImgUrl: user.picture,
-                        role: user.role,
-                        token: this.jwtService.sign(payload)
-                    };
-                    
-                    return signedInUser;
-                } else {
-                    const errMsg = 'Email not found or password invalid';
-                    this.logger.debug(errMsg);
-                    throw new UnauthorizedException(errMsg);
-                }
-            })
-            .catch((error) => {
-                return error;
-            });
+            .exec();
+    
+        // Add this check for invalid credentials
+        if (!user || user.pass !== credentials.pass) {
+            const errMsg = 'Invalid email or password';
+            this.logger.debug(errMsg);
+            throw new UnauthorizedException(errMsg);
+        }
+    
+        // If credentials are correct, continue with creating token and returning user identity
+        const payload = {
+            user_id: user._id
+        };
+        const signedInUser = {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            emailadres: user.emailadres,
+            birthdate: user.birthdate,
+            picture: user.picture,
+            role: user.role,
+            token: this.jwtService.sign(payload)
+        };
+        return signedInUser;
     }
 
     async register(user: CreateUserDto): Promise<IUser | null> {

@@ -47,7 +47,7 @@ export class AuthService{
     }
 
     public login(emailadres: string, pass: string, options?: any): Observable<IUserIdentity> {
-        console.log('frondend service')
+        console.log('frontend service')
         console.log(`login ${this.endpoint}auth/login`);
         return this.http
             .post<ApiResponse<IUserIdentity>>(this.endpoint+'auth/login', 

@@ -13,15 +13,23 @@ export class LoginComponent {
   _id: string | null = null;
   emailadres = '';
   pass= '';
+  errorMessage: string | undefined;
   
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService){}
 
   onSubmit(): void {
-      this.authService.login(this.emailadres, this.pass).subscribe((results) =>{
-        console.log(`result: ${results}`);
-        this.router.navigate(['/dashboard']);
-      })
-      
-}
+    this.authService.login(this.emailadres, this.pass).subscribe({
+        next: (results) => {
+            console.log(`result: ${results}`);
+            this.router.navigate(['/dashboard']);
+        },
+        error: (error) => {
+            console.error('Login failed:', error);
+            // Here you can add code to show an error message to the user
+            // For example, you could have an error message property:
+            this.errorMessage = 'Invalid email or password';
+        }
+    });
+  }
 }
