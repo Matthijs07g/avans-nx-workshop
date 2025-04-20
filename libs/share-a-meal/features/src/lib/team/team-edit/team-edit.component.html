@@ -8,10 +8,10 @@
         </div>
         <div class="col-md-6">
           <h2>{{ team.name }}</h2>
-          <p>Locatie: {{ team.owner }}</p>
+          <p>Oprichter: {{ team.owner }}</p>
           <p>Nationaliteit: {{ team.country }}</p>
-          <p>Lengte: {{ team.dateFounded }}Km</p>
-          <p>Kampioen: {{ team.constructor_champions }}</p>
+          <p>Datum oprichting: {{team.dateFounded}}</p>
+          <p>Kampioenshappen: {{ team.constructor_champions }}</p>
   
           <!-- Edit Form -->
           <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">

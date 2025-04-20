@@ -1,18 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IBlog } from '@avans-nx-workshop/shared/api';
 import { BlogService } from '../blog.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { DriverService } from '../../driver/driver.service';
-import { TeamService } from '../../team/team.service';
-import { CircuitService } from '../../circuit/circuit.service';
 
 @Component({
   selector: 'avans-nx-workshop-blog-edit',
   templateUrl: './blog-edit.component.html',
   styleUrls: ['./blog-edit.component.css'],
 })
-export class BlogEditComponent {
+export class BlogEditComponent implements OnDestroy, OnInit {
   
   blog: IBlog | null = null;
   subscription: Subscription | undefined = undefined;

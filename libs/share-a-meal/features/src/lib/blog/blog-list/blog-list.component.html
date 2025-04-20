@@ -1,5 +1,9 @@
 <div class="container">
-    <br><a *ngIf="authService.getUserRoleFromLocalStorage() !== 'null'" class="btn btn-primary add" routerLink="new">Create blog</a><br>
+  <h1 class="mt-4">Blogs</h1>
+  <br>
+  <a *ngIf="authService.getUserRoleFromLocalStorage() !== 'null'" class="btn btn-primary add" routerLink="new">Create blog</a>
+  <br>
+  <div *ngIf="blogs && blogs.length > 0; else noResults">
     <div class="row row-cols-4">
       <div *ngFor="let blog of blogs" class="col-md-3 d-flex">
         <div class="card m-3 flex-fill d-flex flex-column" style="width: 18rem;" routerLink="{{ blog._id }}">
@@ -9,5 +13,9 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
+  <ng-template #noResults>
+    <h2>Geen blogs gevonden</h2>
+  </ng-template>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IBlog } from '@avans-nx-workshop/shared/api';
 import { BlogService } from '../blog.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { AuthService } from '../../auth/auth.service';
   templateUrl: './blog-details.component.html',
   styleUrls: ['./blog-details.component.css'],
 })
-export class BlogDetailsComponent {
+export class BlogDetailsComponent implements OnDestroy, OnInit {
   blog: IBlog | null = null;
   subscription: Subscription | undefined = undefined;
   id: string | null = null;
