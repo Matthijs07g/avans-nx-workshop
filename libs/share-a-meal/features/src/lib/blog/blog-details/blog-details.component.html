@@ -12,7 +12,7 @@
           <button class="btn btn-primary back" routerLink="/blog">Terug</button>
 
           
-          <button *ngIf="authService.getUserIdFromLocalStorage() === blog.owner" class="btn btn-primary edit" routerLink="edit">Edit</button>
+          <a *ngIf="authService.getUserIdFromLocalStorage() === blog.owner" class="btn btn-primary edit" routerLink="edit">Edit</a>
           <button *ngIf="authService.getUserIdFromLocalStorage() === blog.owner" class="btn btn-primary delete" (click)="del()">Delete</button>
         </div>
       </div>
