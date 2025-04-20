@@ -13,10 +13,11 @@ h1 {
 }
 
 h3 {
-    color: #15151e;  /* Dark blue/black color often used in F1 */
+    color: #15151e;  
     font-size: 1.8rem;
     margin: 2rem 0 1rem 0;
     padding-bottom: 0.5rem;
+    padding-left: 1.5rem;
     border-bottom: 2px solid #e10600;
 }
 
@@ -93,6 +94,7 @@ img {
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding-left: 1.5 rem;
 }
 
 /* Entity sections */

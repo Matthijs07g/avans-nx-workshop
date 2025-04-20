@@ -1,17 +1,28 @@
+<!-- user-list.component.html -->
 <div class="container">
-  <br><a *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" class="btn btn-primary add" routerLink="new">Add user</a><br>
-  <div class="row row-cols-4">
-    <div *ngFor="let user of users" class="col-md-3 d-flex">
-      <div class="card m-3 flex-fill d-flex flex-column" style="width: 18rem;" routerLink="{{ user._id }}">
-        <img src="{{ user.picture }}" class="card-img-top" alt="profile">
-        <div class="card-body">
-          <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
-          <p class="card-text">{{ user.emailadres }}</p>
-        </div>
+  <div class="header-section">
+    <h1>Users Overview</h1>
+    <a *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" 
+       class="add-button" 
+       routerLink="new">
+       <i class="fas fa-plus"></i> Add User
+    </a>
+  </div>
+
+  <div class="user-grid">
+    <div *ngFor="let user of users" 
+         class="user-item" 
+         routerLink="{{ user._id }}">
+      <div class="user-avatar">
+        <img src="{{ user.picture }}" alt="{{ user.firstName }}">
+      </div>
+      <div class="user-info">
+        <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+        <p class="email">{{ user.emailadres }}</p>
+      </div>
+      <div class="hover-overlay">
+        <span>View Details</span>
       </div>
     </div>
-  </div> 
+  </div>
 </div>
-
-<!-- <a class="btn btn-primary edit" routerLink="{{ user.id }}/edit">Edit</a>
-          <a href="#" class="btn btn-primary delete">Delete</a> -->

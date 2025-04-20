@@ -1,18 +1,130 @@
-.edit{
-    background-color: darkblue;
-}
-.delete{
-    background-color: maroon;
-}
-.usercards{
-    align-self: center;
-}
-
-.row{
-    margin-top: 25px;
-}
-.add{
-    margin-left: 46%;
-    max-width: 100px;
-    background-color: darkred;
-}
+/* user-list.component.css */
+.container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .header-section h1 {
+    color: #2c3e50;
+    font-size: 2.2rem;
+    font-weight: 600;
+  }
+  
+  .add-button {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 10px rgba(41, 128, 185, 0.2);
+  }
+  
+  .add-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(41, 128, 185, 0.3);
+  }
+  
+  .user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .user-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+  }
+  
+  .user-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-avatar {
+    width: 60px;
+    height: 60px;
+    margin-right: 1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #e8f0fe;
+  }
+  
+  .user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .user-info {
+    flex: 1;
+  }
+  
+  .user-info h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .user-info .email {
+    margin: 0.3rem 0 0;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
+  
+  .hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(52, 152, 219, 0.9);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .hover-overlay span {
+    color: white;
+    font-weight: 500;
+  }
+  
+  .user-item:hover .hover-overlay {
+    opacity: 1;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+    
+    .header-section {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+    
+    .user-grid {
+      grid-template-columns: 1fr;
+    }
+  }
