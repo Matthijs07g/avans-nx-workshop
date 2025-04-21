@@ -76,7 +76,7 @@ export class UpdateBlogDto implements IUpdateBlog {
     @IsNotEmpty()
     subjectId!: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
     content!: string;
 }
