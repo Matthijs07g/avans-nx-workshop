@@ -124,7 +124,7 @@ export class BlogService{
      * Handle errors.
      */
     public handleError(error: HttpErrorResponse): Observable<any> {
-        console.log('handleError in UserService', error);
+        console.log('handleError in Blogservice', error);
 
         return throwError(() => new Error(error.message));
     }
