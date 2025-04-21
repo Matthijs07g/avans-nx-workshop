@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="mt-4">Circuits</h1>
   <br>
-  <a *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" class="btn btn-primary add" routerLink="new">Voeg circuit toe</a>
+  <a *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" class="btn btn-primary add" routerLink="new">Add circuit</a>
   <br>
   <div *ngIf="circuits && circuits.length > 0; else noResults">
     <div class="row row-cols-4">

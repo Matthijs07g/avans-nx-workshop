@@ -11,7 +11,7 @@
           <p>Datum oprichting: {{team.dateFounded}}</p>
           <p>Kampioenshappen: {{ team.constructor_champions }}</p>
 
-          <button class="btn btn-primary back" routerLink="/team">Back to Team List</button>
+          <button class="btn btn-primary back" routerLink="/team">Terug</button>
           <button *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" class="btn btn-primary edit" routerLink="edit">Edit</button>
           <button *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" class="btn btn-primary delete" (click)="del()">Delete</button>
         </div>
