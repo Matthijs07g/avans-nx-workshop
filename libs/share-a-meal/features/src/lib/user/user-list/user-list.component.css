@@ -16,7 +16,8 @@
     color: #2c3e50;
     font-size: 2.2rem;
     font-weight: 600;
-  }
+    text-align: center; 
+}
   
   .add-button {
     background: linear-gradient(135deg, #2980b9, #3498db);

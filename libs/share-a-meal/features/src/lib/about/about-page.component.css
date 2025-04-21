@@ -4,12 +4,12 @@
     padding: 0 1.5rem;
 }
 
-/* Title styling */
 h1 {
     color: #e10600;  /* F1 red color */
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
     font-weight: bold;
+    text-align: center; /* Add this line */
 }
 
 h3 {
