@@ -28,7 +28,7 @@ export class CreateBlogDto implements ICreateBlog {
     @IsNotEmpty()
     subjectId!: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
     content!: string;
 }
