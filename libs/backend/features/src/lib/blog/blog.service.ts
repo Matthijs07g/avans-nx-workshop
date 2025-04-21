@@ -49,13 +49,16 @@ export class BlogService {
      */
     async create(req: any): Promise<IBlog | null> {
         Logger.log('create', this.TAG);
+
+        Logger.log('Request body:', JSON.stringify(req.body || req, null, 2));
+        
         const blog = req.body;
     
         if(blog){
             Logger.log(`Create Blog ${blog.title} about ${blog.subjectType}: ${blog.subjectId}`);
             const createdItem = {
                 ...blog,
-                owner: req.user._id, // Assuming you have user info in the request
+                owner: req.user._id, 
                 datePosted: new Date().toLocaleDateString('nl-NL'),
             };
             return this.blogModel.create(createdItem);
