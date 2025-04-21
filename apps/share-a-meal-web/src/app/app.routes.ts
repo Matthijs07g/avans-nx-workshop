@@ -137,7 +137,7 @@ export const appRoutes: Route[] = [
     {
         path: 'blog/:id/edit',
         pathMatch: 'full',
-        component: BlogDetailsComponent
+        component: BlogEditComponent
     },
     {
         path:'login',
