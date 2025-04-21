@@ -69,16 +69,10 @@ export class BlogService{
         console.log(`post ${this.endpoint}blog`);
 
         const owner= this.authService.getUserIdFromLocalStorage()
-        
-        // const today = new Date();
-        // const dd: string | number = today.getDate();
-        // const mm: string | number = today.getMonth() + 1;
-        // const yyyy: number = today.getFullYear();
-
-        // const formattedDay: string = dd < 10 ? `0${dd}` : `${dd}`;
-        // const formattedMonth: string = mm < 10 ? `0${mm}` : `${mm}`;
-        // const formattedDate = `${formattedDay}-${formattedMonth}-${yyyy}`;
-
+        if(!owner){
+            console.error('No owner found in local storage');
+            return throwError(() => new Error('No owner found in local storage'));
+        }
         const datePosted = new Date().toLocaleDateString('nl-NL')
         console.log('Sending blog data:', {owner, title, subjectType, subjectId, content, datePosted});
         return this.http
