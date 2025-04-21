@@ -9,7 +9,7 @@
         <div class="card m-3 flex-fill d-flex flex-column" style="width: 18rem;" routerLink="{{ blog._id }}">
           <div class="card-body">
             <h5 class="card-title">{{ blog.title }}</h5>
-            <p class="card-text">{{ blog.subject }}<br>{{ blog.datePosted }}</p>
+            <p class="card-text">{{ getSubjectName(blog) }}<br>{{ blog.datePosted }}</p>
           </div>
         </div>
       </div>

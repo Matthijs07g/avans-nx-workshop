@@ -2,11 +2,13 @@ import {
     IsNotEmpty,
     IsString,
     IsNumber,
+    IsEnum,
 } from 'class-validator';
 import {
     ICreateBlog,
     IUpdateBlog,
     IUpsertBlog,
+    SubjectType,
 } from '@avans-nx-workshop/shared/api';
 
 /**
@@ -18,9 +20,13 @@ export class CreateBlogDto implements ICreateBlog {
     @IsNotEmpty()
     title!: string;
 
+    @IsEnum(['circuit', 'team', 'user'])
+    @IsNotEmpty()
+    subjectType!: SubjectType;
+
     @IsString()
     @IsNotEmpty()
-    subject!: string;
+    subjectId!: string;
 
     @IsNumber()
     @IsNotEmpty()
@@ -40,9 +46,13 @@ export class UpsertBlogDto implements IUpsertBlog {
     @IsNotEmpty()
     title!: string;
 
+    @IsEnum(['circuit', 'team', 'user'])
+    @IsNotEmpty()
+    subjectType!: SubjectType;
+
     @IsString()
     @IsNotEmpty()
-    subject!: string;
+    subjectId!: string;
 
     @IsString()
     @IsNotEmpty()
@@ -58,9 +68,13 @@ export class UpdateBlogDto implements IUpdateBlog {
     @IsNotEmpty()
     title!: string;
 
+    @IsEnum(['circuit', 'team', 'user'])
+    @IsNotEmpty()
+    subjectType!: SubjectType;
+
     @IsString()
     @IsNotEmpty()
-    subject!: string;
+    subjectId!: string;
 
     @IsNumber()
     @IsNotEmpty()

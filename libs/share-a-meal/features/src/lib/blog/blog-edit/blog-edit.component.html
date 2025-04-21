@@ -1,56 +1,90 @@
-<!-- user-detail.component.html -->
-
 <div class="container">
-    <div *ngIf="blog">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>{{ blog.title }}</h2>
-          <p>Onderwerp: {{ blog.subject }}</p>
-          <p>inhoud: {{ blog.content }}</p>
-  
-          <!-- Edit Form -->
-          <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
-            <div class="form-group">
-              <label for="firstName">Titel:</label>
-              <input type="text" id="firstName" name="firstName" [(ngModel)]="blog.title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="lastName">Onderwerp:</label>
-                <input type="text" id="lastName" name="lastName" [(ngModel)]="blog.subject" class="form-control" required>
-              </div>
-            <div class="form-group">
-              <label for="birthdate">inhoud:</label>
-              <input type="text" id="birthdate" name="birthdate" [(ngModel)]="blog.content" class="form-control" required>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary save">Opslaan</button>
-            <button class="btn btn-primary delete" routerLink="/blog/{{blog._id}}">Terug</button>
-          </form>
-        </div>
+  <div *ngIf="blog">
+    <!-- Edit Form -->
+    <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
+      <div class="form-group">
+        <label for="title">Titel:</label>
+        <input type="text" id="title" name="title" [(ngModel)]="blog.title" class="form-control" required>
       </div>
-    </div>
+      
+      <!-- Subject Type Selection -->
+      <div class="form-group">
+        <label for="subjectType">Type:</label>
+        <select id="subjectType" name="subjectType" [(ngModel)]="blog.subjectType" (change)="onSubjectTypeChange()" class="form-control" required>
+          <option value="CIRCUIT">Circuit</option>
+          <option value="TEAM">Team</option>
+          <option value="DRIVER">Driver</option>
+        </select>
+      </div>
 
-    
-    <div *ngIf="!blog">
-      <h4>Add Blog</h4>
-      <!-- Add Form -->
-      <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
-        <div class="form-group">
-          <label for="firstName">Title:</label>
-          <input type="text" id="firstName" name="firstName" [(ngModel)]="title" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Onderwerp:</label>
-            <input type="text" id="lastName" name="lastName" [(ngModel)]="subject" class="form-control" required>
-          </div>
-        <div class="form-group">
-          <label for="birthdate">inhoud:</label>
-          <input type="text" id="birthdate" name="birthdate" [(ngModel)]="content" class="form-control" required>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary save">Opslaan</button>
-        <button class="btn btn-primary delete" routerLink="/blog">Terug</button>
-      </form>
-    </div>
+      <!-- Subject Selection based on type -->
+      <div class="form-group">
+        <label for="subject">Onderwerp:</label>
+        <select id="subject" name="subject" [(ngModel)]="blog.subjectId" class="form-control" required>
+          <ng-container *ngIf="blog.subjectType === 'circuit'">
+            <option *ngFor="let circuit of circuits" [value]="circuit._id">{{circuit.name}}</option>
+          </ng-container>
+          <ng-container *ngIf="blog.subjectType === 'team'">
+            <option *ngFor="let team of teams" [value]="team._id">{{team.name}}</option>
+          </ng-container>
+          <ng-container *ngIf="blog.subjectType === 'driver'">
+            <option *ngFor="let driver of drivers" [value]="driver._id">{{driver.firstName}} {{driver.lastName}}</option>
+          </ng-container>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Inhoud:</label>
+        <input type="text" id="content" name="content" [(ngModel)]="blog.content" class="form-control" required>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary save">Opslaan</button>
+      <button class="btn btn-primary delete" routerLink="/blog/{{blog._id}}">Terug</button>
+    </form>
   </div>
-  
+
+  <!-- Create New Blog -->
+  <div *ngIf="!blog">
+    <h4>Add Blog</h4>
+    <form (ngSubmit)="onSubmit()" #circuitForm="ngForm">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" [(ngModel)]="title" class="form-control" required>
+      </div>
+
+      <!-- Subject Type Selection -->
+      <div class="form-group">
+        <label for="subjectType">Type:</label>
+        <select id="subjectType" name="subjectType" [(ngModel)]="subjectType" (change)="onSubjectTypeChange()" class="form-control" required>
+          <option value="CIRCUIT">Circuit</option>
+          <option value="TEAM">Team</option>
+          <option value="DRIVER">Driver</option>
+        </select>
+      </div>
+
+      <!-- Subject Selection based on type -->
+      <div class="form-group">
+        <label for="subject">Onderwerp:</label>
+        <select id="subject" name="subject" [(ngModel)]="subjectId" class="form-control" required>
+          <ng-container *ngIf="subjectType === 'CIRCUIT'">
+            <option *ngFor="let circuit of circuits" [value]="circuit._id">{{circuit.name}}</option>
+          </ng-container>
+          <ng-container *ngIf="subjectType === 'TEAM'">
+            <option *ngFor="let team of teams" [value]="team._id">{{team.name}}</option>
+          </ng-container>
+          <ng-container *ngIf="subjectType === 'DRIVER'">
+            <option *ngFor="let driver of drivers" [value]="driver._id">{{driver.firstName}} {{driver.lastName}}</option>
+          </ng-container>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Inhoud:</label>
+        <input type="text" id="content" name="content" [(ngModel)]="content" class="form-control" required>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary save">Opslaan</button>
+      <button class="btn btn-primary delete" routerLink="/blog">Terug</button>
+    </form>
+  </div>
+</div>

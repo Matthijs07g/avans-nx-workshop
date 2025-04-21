@@ -1,8 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { IBlog } from '@avans-nx-workshop/shared/api';
-import { BehaviorSubject } from 'rxjs';
 import { Logger } from '@nestjs/common';
-import { error } from 'console';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BlogDocument, Blog as BlogModel } from './blog.schema';
@@ -52,28 +50,31 @@ export class BlogService {
     async create(req: any): Promise<IBlog | null> {
         Logger.log('create', this.TAG);
         const blog = req.body;
-        //const blog_id = req.blog.blog_id     for authorisatie
-
+    
         if(blog){
-            Logger.log(`Create Blog ${blog.title}`);
+            Logger.log(`Create Blog ${blog.title} about ${blog.subjectType}: ${blog.subjectId}`);
             const createdItem = {
                 ...blog,
+                owner: req.user._id, // Assuming you have user info in the request
                 datePosted: new Date().toLocaleDateString('nl-NL'),
             };
             return this.blogModel.create(createdItem);
         }
         return null;
     }
-
+    
     async update(_id: string, blog: UpdateBlogDto): Promise<IBlog | null> {
-        Logger.log(`Update Blog (${blog.title})`, this.TAG);
-        return this.blogModel.findByIdAndUpdate({ _id }, blog);
-
-    }
-
-    async delete(_id: string){
-        Logger.log(`Delete Blog (${_id})`, this.TAG);
-        return this.blogModel.findByIdAndDelete({ _id });
+        Logger.log(`Update Blog ${_id}`, this.TAG);
+        return this.blogModel.findByIdAndUpdate(
+            { _id }, 
+            { 
+                title: blog.title,
+                subjectType: blog.subjectType,
+                subjectId: blog.subjectId,
+                content: blog.content
+            },
+            { new: true }
+        );
     }
 
     // async getRecommendations(_Id: string): Promise<IBlog[] | null> {

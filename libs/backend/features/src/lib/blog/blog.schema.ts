@@ -1,4 +1,4 @@
-import { IBlog } from "@avans-nx-workshop/shared/api";
+import { IBlog, SubjectType } from "@avans-nx-workshop/shared/api";
 import { IsMongoId } from "class-validator";
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
@@ -15,8 +15,11 @@ export class Blog implements IBlog {
     @Prop({ required: true})
     title!: string;
 
-    @Prop({ required: true })
-    subject!: string;
+    @Prop({ required: true, enum: ['circuit', 'team', 'user']})
+    subjectType!: SubjectType;
+
+    @Prop({ required: true})
+    subjectId!: string;
 
     @Prop({ required: true})
     content!: string;
