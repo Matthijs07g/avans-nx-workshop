@@ -77,6 +77,12 @@ export class BlogService {
         );
     }
 
+    async delete(_id: string): Promise<IBlog | null> {
+        Logger.log(`Delete Blog ${_id}`, this.TAG);
+        await this.blogModel.findByIdAndDelete(_id).exec();
+        return  null;
+    }
+
     // async getRecommendations(_Id: string): Promise<IBlog[] | null> {
     //     Logger.log(`Get Recommendations(${_Id})`);
     
