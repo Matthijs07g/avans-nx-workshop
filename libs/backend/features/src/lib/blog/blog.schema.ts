@@ -15,7 +15,7 @@ export class Blog implements IBlog {
     @Prop({ required: true})
     title!: string;
 
-    @Prop({ required: true, enum: ['circuit', 'team', 'user']})
+    @Prop({ required: true, type: String, enum: ['circuit', 'team', 'user']})
     subjectType!: SubjectType;
 
     @Prop({ required: true})
