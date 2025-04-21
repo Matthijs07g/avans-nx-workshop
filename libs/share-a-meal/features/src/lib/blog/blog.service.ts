@@ -79,11 +79,11 @@ export class BlogService{
         // const formattedMonth: string = mm < 10 ? `0${mm}` : `${mm}`;
         // const formattedDate = `${formattedDay}-${formattedMonth}-${yyyy}`;
 
-        const formattedDate = new Date().toLocaleDateString('nl-NL')
-        
+        const datePosted = new Date().toLocaleDateString('nl-NL')
+        console.log('Sending blog data:', {owner, title, subjectType, subjectId, content, datePosted});
         return this.http
             .post<ApiResponse<IBlog>>(this.endpoint+'blog', {
-                owner, title, subjectType, subjectId, content, formattedDate
+                owner, title, subjectType, subjectId, content, datePosted
             })
             .pipe(
                 tap(console.log),
