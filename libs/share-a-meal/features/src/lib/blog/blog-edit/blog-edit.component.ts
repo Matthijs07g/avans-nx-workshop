@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IBlog, ICircuit, IDriver, ITeam } from '@avans-nx-workshop/shared/api';
+import { IBlog, ICircuit, IDriver, ITeam, SubjectType } from '@avans-nx-workshop/shared/api';
 import { BlogService } from '../blog.service';
 import { CircuitService } from '../../circuit/circuit.service';
 import { TeamService } from '../../team/team.service';
@@ -19,7 +19,7 @@ export class BlogEditComponent implements OnDestroy, OnInit {
   
   // For new blog
   title = '';
-  subjectType = 'CIRCUIT';
+  subjectType: SubjectType = 'circuit';
   subjectId = '';
   content = '';
 

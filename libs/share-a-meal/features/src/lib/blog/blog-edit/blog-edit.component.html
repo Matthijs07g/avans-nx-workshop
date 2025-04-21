@@ -11,9 +11,9 @@
       <div class="form-group">
         <label for="subjectType">Type:</label>
         <select id="subjectType" name="subjectType" [(ngModel)]="blog.subjectType" (change)="onSubjectTypeChange()" class="form-control" required>
-          <option value="CIRCUIT">Circuit</option>
-          <option value="TEAM">Team</option>
-          <option value="DRIVER">Driver</option>
+          <option value="circuit">Circuit</option>
+          <option value="team">Team</option>
+          <option value="driver">Driver</option>
         </select>
       </div>
 
@@ -56,9 +56,9 @@
       <div class="form-group">
         <label for="subjectType">Type:</label>
         <select id="subjectType" name="subjectType" [(ngModel)]="subjectType" (change)="onSubjectTypeChange()" class="form-control" required>
-          <option value="CIRCUIT">Circuit</option>
-          <option value="TEAM">Team</option>
-          <option value="DRIVER">Driver</option>
+          <option value="cricuit">Circuit</option>
+          <option value="team">Team</option>
+          <option value="driver">Driver</option>
         </select>
       </div>
 
@@ -66,13 +66,13 @@
       <div class="form-group">
         <label for="subject">Onderwerp:</label>
         <select id="subject" name="subject" [(ngModel)]="subjectId" class="form-control" required>
-          <ng-container *ngIf="subjectType === 'CIRCUIT'">
+          <ng-container *ngIf="subjectType === 'circuit'">
             <option *ngFor="let circuit of circuits" [value]="circuit._id">{{circuit.name}}</option>
           </ng-container>
-          <ng-container *ngIf="subjectType === 'TEAM'">
+          <ng-container *ngIf="subjectType === 'team'">
             <option *ngFor="let team of teams" [value]="team._id">{{team.name}}</option>
           </ng-container>
-          <ng-container *ngIf="subjectType === 'DRIVER'">
+          <ng-container *ngIf="subjectType === 'driver'">
             <option *ngFor="let driver of drivers" [value]="driver._id">{{driver.firstName}} {{driver.lastName}}</option>
           </ng-container>
         </select>

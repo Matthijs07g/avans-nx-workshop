@@ -1,7 +1,7 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap, elementAt } from 'rxjs/operators';
-import { ApiResponse, IBlog, IUser, IUserIdentity } from '@avans-nx-workshop/shared/api';
+import { ApiResponse, IBlog, IUser, IUserIdentity, SubjectType } from '@avans-nx-workshop/shared/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@fst/shared/util-env';
 import { AuthService } from '../auth/auth.service';
@@ -65,23 +65,25 @@ export class BlogService{
     }
 
     //Post Item
-    public create(title: string, subject: string, content: string): Observable<IBlog>{
+    public create(title: string, subjectType: SubjectType, subjectId:string, content: string): Observable<IBlog>{
         console.log(`post ${this.endpoint}blog`);
 
         const owner= this.authService.getUserIdFromLocalStorage()
         
-        const today = new Date();
-        const dd: string | number = today.getDate();
-        const mm: string | number = today.getMonth() + 1;
-        const yyyy: number = today.getFullYear();
+        // const today = new Date();
+        // const dd: string | number = today.getDate();
+        // const mm: string | number = today.getMonth() + 1;
+        // const yyyy: number = today.getFullYear();
 
-        const formattedDay: string = dd < 10 ? `0${dd}` : `${dd}`;
-        const formattedMonth: string = mm < 10 ? `0${mm}` : `${mm}`;
-        const formattedDate = `${formattedDay}-${formattedMonth}-${yyyy}`;
+        // const formattedDay: string = dd < 10 ? `0${dd}` : `${dd}`;
+        // const formattedMonth: string = mm < 10 ? `0${mm}` : `${mm}`;
+        // const formattedDate = `${formattedDay}-${formattedMonth}-${yyyy}`;
+
+        const formattedDate = new Date().toLocaleDateString('nl-NL')
         
         return this.http
             .post<ApiResponse<IBlog>>(this.endpoint+'blog', {
-                owner, title, subject, content, formattedDate
+                owner, title, subjectType, subjectId, content, formattedDate
             })
             .pipe(
                 tap(console.log),
@@ -91,11 +93,11 @@ export class BlogService{
     }
 
     //Put Item
-    public update(_id:string | null, title: string | undefined, subject: string | undefined, content: string | undefined): Observable<IBlog>{
+    public update(_id:string | null, title: string | undefined, subjectType: SubjectType | undefined, subjectId: string | undefined, content: string | undefined): Observable<IBlog>{
         console.log(`put ${this.endpoint}blog${_id}`);
         return this.http
             .put<ApiResponse<IBlog>>(this.endpoint+'blog/'+_id, {
-                title, subject, content
+                title, subjectType, subjectId, content
             })
             .pipe(
                 tap(console.log),
