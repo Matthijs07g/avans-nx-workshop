@@ -8,6 +8,10 @@
     "test": "nx run-many -t test",
     "serve": "nx run-many --target=serve --all"
   },
+  "engines": {
+    "node": "^20.0.0",
+    "npm": "^10.0.0"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~16.2.0",
