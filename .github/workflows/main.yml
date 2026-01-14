@@ -36,14 +36,19 @@ jobs:
           name: share-a-meal-web
           path: share-a-meal-web-release.zip
 
-      # ---------- BACKEND ZIP (MINIMAL CHANGE) ----------
-      # Zip the data-api source including the new package.json
-      - name: Zip data-api source
+      # ---------- BACKEND ZIP (compile JS + package.json) ----------
+      - name: Prepare backend deploy folder
         run: |
-          cd ${GITHUB_WORKSPACE}/apps/data-api
-          zip ${GITHUB_WORKSPACE}/data-api-release.zip . -r
+          mkdir -p deploy/data-api
+          # Copy compiled JS from dist
+          cp -r dist/apps/data-api/* deploy/data-api/
+          # Copy package.json for Azure start
+          cp apps/data-api/package.json deploy/data-api/
+          # Zip everything at root
+          cd deploy
+          zip -r ${GITHUB_WORKSPACE}/data-api-release.zip data-api/*
 
-      - name: Upload data-api artifact
+      - name: Upload backend artifact
         uses: actions/upload-artifact@v4
         with:
           name: data-api
@@ -90,13 +95,12 @@ jobs:
           name: data-api
 
       - name: Unzip backend artifact
-        run: unzip data-api-release.zip
+        run: unzip data-api-release.zip -d ./data-api
 
-      # Azure will run npm install and npm start automatically
       - name: Deploy backend to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: f1blogger
           slot-name: Production
           publish-profile: ${{ secrets.NESTJS_PUBLISHPROFILE }}
-          package: .
+          package: ./data-api
