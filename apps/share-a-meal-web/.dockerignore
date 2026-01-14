@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+coverage/
+.nyc_output
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+docs/
+
+# Test files
+*.spec.ts
+*.e2e-spec.ts
+jest.config.*
+cypress/
+cypress.config.ts
+
+# Other applications (only include what we need)
+apps/data-api/
+apps/data-api-e2e/
+apps/rcmnd-api/
+apps/rcmnd-api-e2e/
+apps/share-a-meal-web-e2e/
+
+# Nx cache
+.nx/
