@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap, throwIfEmpty } from 'rxjs/operators';
 import { ApiResponse, IDriver, ITeam } from '@avans-nx-workshop/shared/api';
 import { Injectable } from '@angular/core';
-import { environment } from '@fst/shared/util-env';
+import { environment } from '@avans-nx-workshop/shared/util-env';
 import { TeamService } from '../team/team.service';
 
 /**

@@ -1,5 +1,5 @@
 import { AuthModule, backendFeaturesModule } from "@avans-nx-workshop/backend/features";
-import { environment } from "@fst/shared/util-env";
+import { environment } from "@avans-nx-workshop/shared/util-env";
 import { Logger, Module } from "@nestjs/common";
 import { MongooseModule } from '@nestjs/mongoose';
 
