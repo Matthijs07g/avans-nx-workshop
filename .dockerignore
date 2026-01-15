@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Build outputs
+dist/
+tmp/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Documentation
+*.md
+README*
+docs/
+
+# Tests
+*.spec.ts
+*.test.ts
+e2e/
+coverage/
+
+# Environment files
+.env*
+
+# Cache directories
+.nx/
+.angular/
+.cache/
+
+# Logs
+logs/
+*.log
