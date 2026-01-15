@@ -31,7 +31,7 @@ jobs:
             - name: Zip data-api for deployment
               run: |
                   cd ${GITHUB_WORKSPACE}/dist/apps/data-api
-                  zip -r ${GITHUB_WORKSPACE}/data-api-release.zip .
+                  zip -r ${GITHUB_WORKSPACE}/data-api-release.zip . -x '*.git*'
             
             # For Angular frontend
             - name: Zip frontend artifacts for deployment
@@ -88,9 +88,6 @@ jobs:
               with:
                   name: data-api
                   
-            - name: Unzip artifact for deployment
-              run: unzip data-api-release.zip -d package
-              
             - name: 'Deploy to Azure Web App'
               id: deploy-to-webapp
               uses: azure/webapps-deploy@v3
@@ -98,4 +95,4 @@ jobs:
                   app-name: 'f1blogger'
                   slot-name: 'Production'
                   publish-profile: ${{ secrets.NESTJS_PUBLISHPROFILE }}
-                  package: ./package
+                  package: data-api-release.zip
