@@ -22,21 +22,15 @@ jobs:
                   npm run build --if-present
                   # npm run test --if-present
             
-            # For NestJS backend - include everything needed to run
-            - name: Prepare data-api for deployment
-              run: |
-                  mkdir -p deploy-package/data-api
-                  cp -r ${GITHUB_WORKSPACE}/dist/apps/data-api/* deploy-package/data-api/
-                  cp ${GITHUB_WORKSPACE}/package*.json deploy-package/data-api/
-                  
+            # For NestJS backend - Nx will generate package.json
             - name: Install production dependencies for data-api
               run: |
-                  cd deploy-package/data-api
+                  cd ${GITHUB_WORKSPACE}/dist/apps/data-api
                   npm install --production
                   
             - name: Zip data-api for deployment
               run: |
-                  cd deploy-package/data-api
+                  cd ${GITHUB_WORKSPACE}/dist/apps/data-api
                   zip -r ${GITHUB_WORKSPACE}/data-api-release.zip .
             
             # For Angular frontend
