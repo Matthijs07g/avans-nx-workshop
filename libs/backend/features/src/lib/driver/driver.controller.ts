@@ -33,6 +33,7 @@ export class DriverController {
     return this.driverService.update(id, data)
   }
 
+  @UseGuards(AdminGuard)
   @Delete(':id')
   del(@Param('id') id:string){
     return this.driverService.delete(id);
