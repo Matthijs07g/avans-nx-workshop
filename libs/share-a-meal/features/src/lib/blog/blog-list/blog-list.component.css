@@ -1,3 +1,28 @@
+/* Alert styling */
+.alert {
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+    color: #0c5460;
+}
+
+.alert-info .btn-primary {
+    background-color: #e10600;
+    border-color: #e10600;
+    font-size: 0.875rem;
+    padding: 0.375rem 1rem;
+}
+
+.alert-info .btn-primary:hover {
+    background-color: #c20500;
+    border-color: #c20500;
+}
+
 .edit{
     background-color: darkblue;
 }

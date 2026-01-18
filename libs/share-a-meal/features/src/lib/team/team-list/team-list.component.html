@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="authService.getUserRoleFromLocalStorage() === 'null' || !authService.getUserRoleFromLocalStorage()" class="alert alert-warning text-center mb-4" role="alert">
+  <div *ngIf="!authService.isLoggedIn()" class="alert alert-warning text-center mb-4" role="alert">
     <i class="fas fa-lock"></i> 
     <strong>Inloggen vereist:</strong> Log in om teams te bekijken.
     <a routerLink="/login" class="btn btn-primary btn-sm ms-2">Inloggen</a>

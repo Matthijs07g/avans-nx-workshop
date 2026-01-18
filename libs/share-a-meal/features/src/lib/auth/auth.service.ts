@@ -93,16 +93,33 @@ export class AuthService{
         return userId;
     }
 
-    getUserRoleFromLocalStorage(): string{
+    getUserRoleFromLocalStorage(): string | null {
         const storedUser = localStorage.getItem(this.CURRENT_USER);
-        let localUser;
-        if(storedUser){
-            localUser = JSON.parse(storedUser);
-        } else{
+        if(!storedUser){
             Logger.debug('No user in localstorage');
+            return null;
         }
-        const userId = localUser.results.role;
-        return userId;
+        try {
+            const localUser = JSON.parse(storedUser);
+            return localUser.results?.role || null;
+        } catch (error) {
+            Logger.debug('Error parsing user from localStorage:', error);
+            return null;
+        }
+    }
+
+    isLoggedIn(): boolean {
+        const storedUser = localStorage.getItem(this.CURRENT_USER);
+        if(!storedUser) {
+            return false;
+        }
+        try {
+            const localUser = JSON.parse(storedUser);
+            return localUser && localUser.results && localUser.results._id;
+        } catch (error) {
+            Logger.debug('Error parsing user from localStorage:', error);
+            return false;
+        }
     }
 
     private saveUserToLocalStorage(user: IUserIdentity): void{

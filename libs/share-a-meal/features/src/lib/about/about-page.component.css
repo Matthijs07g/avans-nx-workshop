@@ -36,6 +36,13 @@ h3 {
     border-bottom: 2px solid #e10600;
 }
 
+.lead {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
 /* Paragraph styling */
 p {
     font-size: 1.1rem;
