@@ -7,7 +7,9 @@
   </div>
   
   <div class="header-section">
-    <h1>Users</h1>
+    <div class="w-100 text-center">
+      <h1>Users</h1>
+    </div>
     <a *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" 
        class="add-button" 
        routerLink="new">

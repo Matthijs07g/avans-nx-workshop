@@ -6,5 +6,7 @@ import {
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(appRoutes, withEnabledBlockingInitialNavigation())],
+  providers: [
+    provideRouter(appRoutes, withEnabledBlockingInitialNavigation())
+  ],
 };
