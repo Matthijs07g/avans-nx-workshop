@@ -1,5 +1,11 @@
 <!-- user-list.component.html -->
 <div class="container">
+  <div *ngIf="authService.getUserRoleFromLocalStorage() === 'null' || !authService.getUserRoleFromLocalStorage()" class="alert alert-warning text-center mb-4" role="alert">
+    <i class="fas fa-lock"></i> 
+    <strong>Inloggen vereist:</strong> Log in om gebruikers te bekijken.
+    <a routerLink="/login" class="btn btn-primary btn-sm ms-2">Inloggen</a>
+  </div>
+  
   <div class="header-section">
     <h1>Users</h1>
     <a *ngIf="authService.getUserRoleFromLocalStorage() === 'Admin'" 

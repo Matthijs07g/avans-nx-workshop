@@ -1,15 +1,30 @@
 /* Main container styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
 .row {
     margin: 2rem 0;
     padding: 0 1.5rem;
 }
 
+/* Main title styling */
 h1 {
     color: #e10600;  /* F1 red color */
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
     font-weight: bold;
-    text-align: center; /* Add this line */
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.lead {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 2rem;
+    font-weight: 300;
 }
 
 h3 {

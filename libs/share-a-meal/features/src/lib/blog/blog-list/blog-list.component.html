@@ -1,4 +1,10 @@
 <div class="container">
+  <div *ngIf="authService.getUserRoleFromLocalStorage() === 'null' || !authService.getUserRoleFromLocalStorage()" class="alert alert-info text-center mb-4" role="alert">
+    <i class="fas fa-info-circle"></i> 
+    <strong>Tip:</strong> Log in om blogs te maken en te beheren.
+    <a routerLink="/login" class="btn btn-primary btn-sm ms-2">Inloggen</a>
+  </div>
+  
   <h1 class="mt-4">Blogs</h1>
   <br>
   <a *ngIf="authService.getUserRoleFromLocalStorage() !== 'null'" class="btn btn-primary add" routerLink="new">Create blog</a>
