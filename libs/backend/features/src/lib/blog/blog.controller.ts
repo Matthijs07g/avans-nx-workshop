@@ -1,19 +1,22 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Request, UseGuards } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { IBlog } from '@avans-nx-workshop/shared/api';
 import { UpdateBlogDto } from '@avans-nx-workshop/backend/dto';
 import { CreateBlogDto } from '@avans-nx-workshop/backend/dto';
+import { Public } from '../auth/decorators/decorators';
 
 @Controller('blog')
 export class BlogController {
     
     constructor(private blogService: BlogService) {}
 
+  @Public()
   @Get('')
   getAll(): Promise<IBlog[]> {
     return this.blogService.getAll();
   }
 
+  @Public()
   @Get(':id')
   getOne(@Param('id') id: string): Promise<IBlog | null> {
     return this.blogService.getOne(id);
