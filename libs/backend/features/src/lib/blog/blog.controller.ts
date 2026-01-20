@@ -1,9 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Request } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { IBlog } from '@avans-nx-workshop/shared/api';
 import { UpdateBlogDto } from '@avans-nx-workshop/backend/dto';
 import { CreateBlogDto } from '@avans-nx-workshop/backend/dto';
-import { AuthGuard } from '../auth/auth.guards';
 
 @Controller('blog')
 export class BlogController {
@@ -26,23 +25,9 @@ export class BlogController {
   // }
   
 
-  @UseGuards(AuthGuard)
   @Post('')
   create(@Request() req : CreateBlogDto): Promise<IBlog | null> {
     return this.blogService.create(req);
-  }
-
-  @UseGuards(AuthGuard)
-  @Put(':id')
-  update(@Param('id') id: string, @Body() data: UpdateBlogDto): Promise<IBlog | null> {
-    return this.blogService.update(id, data)
-  }
-
-  @UseGuards(AuthGuard)
-  @Delete(':id')
-  del(@Param('id') id:string){
-    return this.blogService.delete(id);
-  }
   }
 
   @Put(':id')
