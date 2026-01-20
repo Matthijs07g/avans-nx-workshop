@@ -15,6 +15,8 @@ import { UserSchema, User as UserModel } from './user/user.schema';
 import { BlogController } from './blog/blog.controller';
 import { BlogSchema, Blog as BlogModel } from './blog/blog.schema';
 import { BlogService } from './blog/blog.service';
+import { JwtModule } from '@nestjs/jwt';
+import { AuthGuard } from './auth/auth.guards';
 
 @Module({
   imports: [
@@ -25,6 +27,10 @@ import { BlogService } from './blog/blog.service';
       { name: UserModel.name, schema: UserSchema },
       { name: BlogModel.name, schema: BlogSchema }
     ]),
+    JwtModule.register({
+      secret: process.env['JWT_SECRET'] || 'secretstring',
+      signOptions: { expiresIn: '12 days' }
+    })
   ],
   controllers: [
     UserController,
@@ -33,7 +39,7 @@ import { BlogService } from './blog/blog.service';
     DriverController,
     BlogController,
   ],
-  providers: [UserService, CircuitService, TeamService, DriverService, BlogService],
+  providers: [UserService, CircuitService, TeamService, DriverService, BlogService, AuthGuard],
   exports: [UserService, CircuitService, TeamService, DriverService, BlogService],
 })
 export class backendFeaturesModule {}

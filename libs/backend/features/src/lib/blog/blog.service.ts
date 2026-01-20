@@ -5,13 +5,17 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BlogDocument, Blog as BlogModel } from './blog.schema';
 import { UpdateBlogDto } from '@avans-nx-workshop/backend/dto';
+import { UserService } from '../user/user.service';
+import { Roles } from '@avans-nx-workshop/shared/api';
+import { ForbiddenException, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class BlogService {
     TAG = 'BlogService';
 
     constructor(
-        @InjectModel(BlogModel.name) private blogModel: Model<BlogDocument>
+        @InjectModel(BlogModel.name) private blogModel: Model<BlogDocument>,
+        private userService: UserService
     ) {}
 
 
@@ -64,8 +68,26 @@ export class BlogService {
         return null;
     }
     
-    async update(_id: string, blog: UpdateBlogDto): Promise<IBlog | null> {
-        Logger.log(`Update Blog ${_id}`, this.TAG);
+    async update(_id: string, blog: UpdateBlogDto, userId: string): Promise<IBlog | null> {
+        Logger.log(`Update Blog ${_id} by user ${userId}`, this.TAG);
+        
+        // Check if blog exists
+        const existingBlog = await this.blogModel.findById(_id);
+        if (!existingBlog) {
+            throw new NotFoundException('Blog not found');
+        }
+        
+        // Get user to check role
+        const user = await this.userService.getOne(userId);
+        if (!user) {
+            throw new ForbiddenException('User not found');
+        }
+        
+        // Check if user is admin or owner
+        if (user.role !== Roles.Admin && existingBlog.owner !== userId) {
+            throw new ForbiddenException('You can only edit your own blogs or you must be an admin');
+        }
+        
         return this.blogModel.findByIdAndUpdate(
             { _id }, 
             { 
@@ -78,10 +100,28 @@ export class BlogService {
         );
     }
 
-    async delete(_id: string): Promise<IBlog | null> {
-        Logger.log(`Delete Blog ${_id}`, this.TAG);
+    async delete(_id: string, userId: string): Promise<IBlog | null> {
+        Logger.log(`Delete Blog ${_id} by user ${userId}`, this.TAG);
+        
+        // Check if blog exists
+        const existingBlog = await this.blogModel.findById(_id);
+        if (!existingBlog) {
+            throw new NotFoundException('Blog not found');
+        }
+        
+        // Get user to check role
+        const user = await this.userService.getOne(userId);
+        if (!user) {
+            throw new ForbiddenException('User not found');
+        }
+        
+        // Check if user is admin or owner
+        if (user.role !== Roles.Admin && existingBlog.owner !== userId) {
+            throw new ForbiddenException('You can only delete your own blogs or you must be an admin');
+        }
+        
         await this.blogModel.findByIdAndDelete(_id).exec();
-        return  null;
+        return null;
     }
 
     // async getRecommendations(_Id: string): Promise<IBlog[] | null> {
