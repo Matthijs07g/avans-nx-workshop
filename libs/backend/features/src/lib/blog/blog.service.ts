@@ -68,26 +68,8 @@ export class BlogService {
         return null;
     }
     
-    async update(_id: string, blog: UpdateBlogDto, userId: string): Promise<IBlog | null> {
-        Logger.log(`Update Blog ${_id} by user ${userId}`, this.TAG);
-        
-        // Check if blog exists
-        const existingBlog = await this.blogModel.findById(_id);
-        if (!existingBlog) {
-            throw new NotFoundException('Blog not found');
-        }
-        
-        // Get user to check role
-        const user = await this.userService.getOne(userId);
-        if (!user) {
-            throw new ForbiddenException('User not found');
-        }
-        
-        // Check if user is admin or owner
-        if (user.role !== Roles.Admin && existingBlog.owner !== userId) {
-            throw new ForbiddenException('You can only edit your own blogs or you must be an admin');
-        }
-        
+    async update(_id: string, blog: UpdateBlogDto): Promise<IBlog | null> {
+        Logger.log(`Update Blog ${_id}`, this.TAG);
         return this.blogModel.findByIdAndUpdate(
             { _id }, 
             { 
@@ -100,26 +82,8 @@ export class BlogService {
         );
     }
 
-    async delete(_id: string, userId: string): Promise<IBlog | null> {
-        Logger.log(`Delete Blog ${_id} by user ${userId}`, this.TAG);
-        
-        // Check if blog exists
-        const existingBlog = await this.blogModel.findById(_id);
-        if (!existingBlog) {
-            throw new NotFoundException('Blog not found');
-        }
-        
-        // Get user to check role
-        const user = await this.userService.getOne(userId);
-        if (!user) {
-            throw new ForbiddenException('User not found');
-        }
-        
-        // Check if user is admin or owner
-        if (user.role !== Roles.Admin && existingBlog.owner !== userId) {
-            throw new ForbiddenException('You can only delete your own blogs or you must be an admin');
-        }
-        
+    async delete(_id: string): Promise<IBlog | null> {
+        Logger.log(`Delete Blog ${_id}`, this.TAG);
         await this.blogModel.findByIdAndDelete(_id).exec();
         return null;
     }
