@@ -3,20 +3,18 @@ import { BlogService } from './blog.service';
 import { IBlog } from '@avans-nx-workshop/shared/api';
 import { UpdateBlogDto } from '@avans-nx-workshop/backend/dto';
 import { CreateBlogDto } from '@avans-nx-workshop/backend/dto';
-import { Public } from '../auth/decorators/decorators';
+import { AuthGuard } from '../auth/auth.guards';
 
 @Controller('blog')
 export class BlogController {
     
     constructor(private blogService: BlogService) {}
 
-  @Public()
   @Get('')
   getAll(): Promise<IBlog[]> {
     return this.blogService.getAll();
   }
 
-  @Public()
   @Get(':id')
   getOne(@Param('id') id: string): Promise<IBlog | null> {
     return this.blogService.getOne(id);
@@ -28,9 +26,23 @@ export class BlogController {
   // }
   
 
+  @UseGuards(AuthGuard)
   @Post('')
   create(@Request() req : CreateBlogDto): Promise<IBlog | null> {
     return this.blogService.create(req);
+  }
+
+  @UseGuards(AuthGuard)
+  @Put(':id')
+  update(@Param('id') id: string, @Body() data: UpdateBlogDto): Promise<IBlog | null> {
+    return this.blogService.update(id, data)
+  }
+
+  @UseGuards(AuthGuard)
+  @Delete(':id')
+  del(@Param('id') id:string){
+    return this.blogService.delete(id);
+  }
   }
 
   @Put(':id')
